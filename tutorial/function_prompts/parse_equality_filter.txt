@@ -1,0 +1,1 @@
+Please implement parse_equality_filter() for the biomedical workshop pipeline. Support the same explicit equality grammar as QC, return the column and value, and raise a clear error for unsupported syntax. Do not evaluate arbitrary source strings. Keep this step focused on the named function and explain its input/output contract.

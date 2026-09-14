@@ -1,0 +1,1 @@
+Please implement check_qc_gate_consistency() for the biomedical workshop pipeline. Verify that BLOCK never produced a fitted result and that COMPLETED required a valid ALLOW. Recognize FAILED explicitly, and reject contradictory counts, failed checks, or result fields. Keep this step focused on the named function and explain its input/output contract.

@@ -1,0 +1,383 @@
+WEBVTT
+
+00:00:00.350 --> 00:00:01.305
+Welcome.
+
+00:00:01.305 --> 00:00:07.748
+This tutorial breaks a biomedical agentic pipeline into the components you can ask a coding agent to build.
+
+00:00:07.748 --> 00:00:13.986
+We will explain the purpose of each skill, helper, and hook, and show a construction prompt you can adapt.
+
+00:00:13.986 --> 00:00:18.715
+The workshop SAP and datasets are already supplied.
+
+00:00:18.715 --> 00:00:22.839
+This is a project blueprint, not a recording of a fresh build.
+
+00:00:22.839 --> 00:00:26.073
+The full prompts and function guide accompany the video.
+
+00:00:27.117 --> 00:00:29.283
+Begin with the analysis question.
+
+00:00:29.283 --> 00:00:34.940
+The agent extracts requirements from the SAP into a structured contract.
+
+00:00:34.940 --> 00:00:38.252
+A readiness skill calls deterministic data checks.
+
+00:00:38.252 --> 00:00:44.644
+The pre-analysis gate either blocks the analysis or allows the specified ANCOVA.
+
+00:00:44.644 --> 00:00:47.814
+A final review checks the result before reporting.
+
+00:00:47.814 --> 00:00:58.098
+Around these stages, the harness coordinates execution, shared state records the evidence, and a separate pre-tool hook checks protected file operations.
+
+00:00:59.150 --> 00:01:04.190
+Start by telling the coding agent what the project should do and where its boundaries are.
+
+00:01:04.190 --> 00:01:08.571
+This first prompt asks for a project protocol and a build plan.
+
+00:01:08.571 --> 00:01:12.554
+The SAP and data already exist.
+
+00:01:12.554 --> 00:01:17.515
+We want the agent to preserve them and use the protocol to guide the later steps.
+
+00:01:18.550 --> 00:01:24.209
+Ask the coding agent to inspect the existing inputs and write the project protocol first.
+
+00:01:24.209 --> 00:01:31.464
+The request also asks for Git exclusions, so generated files and private material stay out of the source repository.
+
+00:01:31.464 --> 00:01:36.168
+Review the proposed component order before asking it to implement the first skill.
+
+00:01:37.217 --> 00:01:40.698
+A skill describes a repeatable procedure for the agent.
+
+00:01:40.698 --> 00:01:47.669
+Here, that procedure is reading the SAP and extracting what the analysis requires.
+
+00:01:47.669 --> 00:01:51.780
+The important output is a structured contract with source evidence.
+
+00:01:51.780 --> 00:01:58.198
+A successful extraction says that we identified the requirements; it does not say that the data meet them.
+
+00:01:59.217 --> 00:02:04.463
+The construction request should specify both the skill's procedure and its output format.
+
+00:02:04.463 --> 00:02:10.442
+Ask for a value, source section, evidence, and status for every field.
+
+00:02:10.442 --> 00:02:15.597
+The agent should identify missing or ambiguous information instead of guessing.
+
+00:02:15.597 --> 00:02:20.314
+At this stage, it should not open the data or make a readiness decision.
+
+00:02:21.350 --> 00:02:26.313
+The helper handles the predictable structure of this workshop SAP.
+
+00:02:26.313 --> 00:02:31.854
+It turns headings, lists, and the model formula into a contract that other tools can read.
+
+00:02:31.854 --> 00:02:37.408
+We also ask for validation, so a missing requirement cannot disappear silently.
+
+00:02:37.408 --> 00:02:41.313
+The coding agent still needs to review the meaning of the extraction.
+
+00:02:42.350 --> 00:02:48.486
+Ask for a small extractor tailored to the supplied Markdown layout, plus contract validation.
+
+00:02:48.486 --> 00:02:54.401
+The important edge cases are missing fields, conflicting values, and unsupported evidence.
+
+00:02:54.401 --> 00:02:59.285
+A numbered readiness list should be handled as carefully as a bullet list.
+
+00:02:59.285 --> 00:03:04.053
+The resulting contract is an artifact the learner can inspect before continuing.
+
+00:03:05.083 --> 00:03:08.577
+Shared state is the information passed between stages.
+
+00:03:08.577 --> 00:03:15.678
+File fingerprints help identify the input bytes used for a run, while the manifest records the stage decisions.
+
+00:03:15.678 --> 00:03:18.358
+This makes the workflow easier to inspect.
+
+00:03:18.358 --> 00:03:25.136
+A fingerprint identifies content; the gate still has to decide whether the associated evidence is valid.
+
+00:03:26.150 --> 00:03:29.811
+Ask for shared utilities and a per-run manifest.
+
+00:03:29.811 --> 00:03:36.938
+The manifest should identify selected inputs, component versions, stage decisions, and output artifacts.
+
+00:03:36.938 --> 00:03:42.672
+It should also preserve failures, because an interrupted workflow still needs an explanation.
+
+00:03:42.672 --> 00:03:49.618
+Make output-path validation part of the shared utilities so every component protects the supplied sources.
+
+00:03:50.650 --> 00:03:56.451
+This hook answers a different question from data readiness: is the proposed file operation allowed?
+
+00:03:56.451 --> 00:04:00.123
+The hook returns a decision before the controlled tool runs.
+
+00:04:00.123 --> 00:04:03.680
+Its protection depends on wiring it into that dispatch path.
+
+00:04:03.680 --> 00:04:08.409
+The construction prompt asks the coding agent to make that connection explicit.
+
+00:04:09.450 --> 00:04:16.681
+Ask the coding agent to build a function that receives a structured operation and returns allow or block with reasons.
+
+00:04:16.681 --> 00:04:22.158
+Test a permitted read and several prohibited changes using temporary files.
+
+00:04:22.158 --> 00:04:26.256
+The harness must enforce the returned decision before execution.
+
+00:04:26.256 --> 00:04:31.178
+A standalone policy function does not protect operations that bypass it.
+
+00:04:32.217 --> 00:04:36.767
+The readiness skill explains how the agent should check the data against the contract.
+
+00:04:36.767 --> 00:04:40.891
+It should not guess from a filename or silently choose another dataset.
+
+00:04:40.891 --> 00:04:45.272
+In this tutorial, the gate uses a conservative completeness policy.
+
+00:04:45.272 --> 00:04:51.664
+The prompt makes that choice explicit instead of attributing it to an unstated SAP rule.
+
+00:04:52.683 --> 00:04:58.948
+The prompt asks for a skill that guides data readiness, including an explicit efficacy-file choice.
+
+00:04:58.948 --> 00:05:03.948
+It must not repair a failed example by silently substituting a different file.
+
+00:05:03.948 --> 00:05:10.430
+It should explain the expected population, the missing endpoint records, and the selected workshop policy.
+
+00:05:10.430 --> 00:05:14.592
+This is the procedure the agent follows around the QC tool.
+
+00:05:15.617 --> 00:05:19.123
+The QC helper performs the repeatable checks.
+
+00:05:19.123 --> 00:05:24.446
+Its output should explain each requirement, what was observed, and whether it passed.
+
+00:05:24.446 --> 00:05:28.157
+That table gives the agent evidence to discuss with the user.
+
+00:05:28.157 --> 00:05:31.894
+The summary gives the next component a decision it can enforce.
+
+00:05:31.894 --> 00:05:35.425
+We ask for both because they serve different audiences.
+
+00:05:36.450 --> 00:05:43.333
+Ask for one row per deterministic check, with expected and observed values and a clear explanation.
+
+00:05:43.333 --> 00:05:50.408
+Require the helper to detect duplicate endpoint records and unusable model values as well as missing visits.
+
+00:05:50.408 --> 00:05:54.531
+The summary must include counts and matching input fingerprints.
+
+00:05:54.531 --> 00:05:59.312
+An empty or incomplete checking table must not authorize analysis.
+
+00:06:00.350 --> 00:06:04.037
+The gate turns a readiness rule into executable control.
+
+00:06:04.037 --> 00:06:11.769
+The prompt asks the coding agent to check current evidence before calling the model and to prove the blocked path never invokes fitting.
+
+00:06:11.769 --> 00:06:17.233
+This is stronger than telling an agent in a skill document to remember to check QC.
+
+00:06:18.283 --> 00:06:24.251
+The construction prompt should require the gate to verify the current contract and input identities.
+
+00:06:24.251 --> 00:06:28.955
+It should rerun QC on the exact data that will be analyzed.
+
+00:06:28.955 --> 00:06:34.754
+Ask for a test that tracks calls to the fitting function and proves there are none on blocked paths.
+
+00:06:34.754 --> 00:06:36.983
+This makes the control observable.
+
+00:06:38.017 --> 00:06:42.039
+The statistical helper does the calculation after the gate allows it.
+
+00:06:42.039 --> 00:06:48.237
+The prompt specifies the population, endpoint, contrast direction, and numerical checks.
+
+00:06:48.237 --> 00:06:54.822
+It also separates SAP requirements from workshop choices such as the confidence level.
+
+00:06:54.822 --> 00:07:00.776
+We show the output fields here, without pretending that illustrative numbers are observed results.
+
+00:07:01.817 --> 00:07:06.728
+Ask the agent to implement separate dataset-building and model-fitting functions.
+
+00:07:06.728 --> 00:07:12.914
+Specify Placebo as the reference, and the active treatment minus Placebo as the contrast.
+
+00:07:12.914 --> 00:07:17.978
+Require checks for rank deficiency and insufficient residual degrees of freedom.
+
+00:07:17.978 --> 00:07:25.929
+The JSON should preserve full precision, while confidence level and inference settings remain clearly labeled workshop choices.
+
+00:07:26.983 --> 00:07:30.000
+The skill explains how the agent should use the tool.
+
+00:07:30.000 --> 00:07:34.627
+The command-line wrapper gives it a concrete, inspectable interface.
+
+00:07:34.627 --> 00:07:43.982
+Keeping the model calculation in a helper lets the skill stay focused on procedure, while the gate remains enforced inside the actual execution path.
+
+00:07:45.017 --> 00:07:49.168
+The skill and command-line wrapper should use the existing gated helper.
+
+00:07:49.168 --> 00:07:56.230
+Ask the coding agent to document the inputs and return structured blocked, completed, or failed outcomes.
+
+00:07:56.230 --> 00:08:00.018
+Direct command-line use must still enforce the same gate.
+
+00:08:00.018 --> 00:08:05.160
+Keeping the wrapper thin avoids duplicating scientific logic in multiple places.
+
+00:08:06.217 --> 00:08:10.058
+After fitting, the workflow still needs to verify what happened.
+
+00:08:10.058 --> 00:08:16.192
+This hook checks that the result agrees with the contract, QC evidence, and recorded inputs.
+
+00:08:16.192 --> 00:08:21.192
+It also distinguishes a correctly blocked analysis from an inconsistent result.
+
+00:08:21.192 --> 00:08:27.494
+Those outcomes need different reports, even though neither should display a successful treatment estimate.
+
+00:08:28.550 --> 00:08:33.010
+Ask for separate review functions so the learner can see what is being checked.
+
+00:08:33.010 --> 00:08:40.046
+The checks should reconcile the analysis with its contract, verify provenance, and validate numerical consistency.
+
+00:08:40.046 --> 00:08:45.137
+A correctly blocked analysis receives a block decision and an issue report.
+
+00:08:45.137 --> 00:08:50.884
+An inconsistent result receives a fail decision and must not be reported as success.
+
+00:08:51.917 --> 00:08:57.279
+The report writer turns the checked artifacts into an answer a reader can understand.
+
+00:08:57.279 --> 00:09:00.591
+This is an explicit addition to the reference demo.
+
+00:09:00.591 --> 00:09:10.075
+The construction prompt asks for separate completed, blocked, and diagnostic reports, and it requires the final text to match the version that was reviewed.
+
+00:09:11.083 --> 00:09:16.278
+Request a report writer that uses the structured artifacts as its source of truth.
+
+00:09:16.278 --> 00:09:19.332
+A completed branch reports verified numbers.
+
+00:09:19.332 --> 00:09:23.855
+A blocked branch explains missing requirements without displaying estimates.
+
+00:09:23.855 --> 00:09:26.626
+A failed review produces diagnostics.
+
+00:09:26.626 --> 00:09:32.580
+The writer should produce a draft first and release the same text only after its review is complete.
+
+00:09:33.617 --> 00:09:37.536
+The harness joins the components into one controlled workflow.
+
+00:09:37.536 --> 00:09:43.167
+The agent uses the workflow skill to interpret the user's request and choose the inputs.
+
+00:09:43.167 --> 00:09:47.716
+The Python controller handles the sequence, decisions, and artifacts.
+
+00:09:47.716 --> 00:09:54.559
+A blocked path is part of the design, and the manifest should explain it as clearly as a completed analysis.
+
+00:09:55.617 --> 00:10:01.301
+Ask the coding agent to wire the components together through the workflow skill and orchestrator.
+
+00:10:01.301 --> 00:10:04.214
+The user still chooses the efficacy file.
+
+00:10:04.214 --> 00:10:11.842
+The controller should keep a manifest even when a stage fails, and distinguish process exit codes from analysis decisions.
+
+00:10:11.842 --> 00:10:16.095
+A command can finish normally while its domain decision is block.
+
+00:10:17.117 --> 00:10:22.698
+The final construction prompt asks for a reproducible walkthrough and meaningful checks.
+
+00:10:22.698 --> 00:10:30.327
+Learners should be able to see both branches, inspect the evidence, and verify that blocked analysis truly never fits a model.
+
+00:10:30.327 --> 00:10:40.184
+These are instructions they can give their own coding agent; this video presents the project and the build requests, rather than a recording of those requests being executed.
+
+00:10:41.183 --> 00:10:45.502
+The final prompt asks for a learner walkthrough and acceptance checks.
+
+00:10:45.502 --> 00:10:49.110
+The missing-Week-24 case must block fitting.
+
+00:10:49.110 --> 00:10:54.819
+The complete-Week-24 case must earn its passing decision through the checks.
+
+00:10:54.819 --> 00:11:00.077
+Also request failure cases for stale evidence and inconsistent results.
+
+00:11:00.077 --> 00:11:05.502
+When learners execute these requests, their coding agent should report what actually happened.
+
+00:11:06.517 --> 00:11:09.431
+You now have a component-by-component blueprint.
+
+00:11:09.431 --> 00:11:15.320
+Start with the project protocol, then work through the skills, helpers, hooks, and harness.
+
+00:11:15.320 --> 00:11:21.454
+Send one construction request at a time and inspect the generated artifacts before moving on.
+
+00:11:21.454 --> 00:11:26.995
+The accompanying workbook includes the complete chapter prompts and smaller function-level requests.
+
+00:11:26.995 --> 00:11:35.719
+Use the supplied inputs, keep source documents separate from agent instructions, and report only the outcomes your own checks actually observe.
+

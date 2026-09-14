@@ -1,0 +1,4 @@
+interface:
+  display_name: "Biomed Analysis Workflow"
+  short_description: "Run governed SAP-to-ANCOVA workflow"
+  default_prompt: "Use $biomed-analysis-workflow to run the governed SAP extraction, data QC, QC-gated ANCOVA, and final review workflow."

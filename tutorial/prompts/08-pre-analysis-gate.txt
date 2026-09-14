@@ -1,0 +1,5 @@
+Please build the pre-analysis gate around require_qc_allow(). The public analysis entry point must consult it before constructing or fitting an ANCOVA model.
+
+Do more than check whether a JSON field says ALLOW. Validate the QC schema, required checks, failed-term list, run identity, and fingerprints of the contract and current data. Within the local workflow, rerun deterministic QC on the exact in-memory inputs that will be analyzed, so editing a summary cannot authorize bad data. If evidence is missing, malformed, stale, contradictory, or failed, return BLOCKED with analysis_executed=false and specific reasons.
+
+Keep this gate callable independently for teaching, but wire it into every supported analysis entry point. Add a test using a spy or stub to prove that the fitting function is never called on blocked paths. Do not implement the statistical fitting routine yet.

@@ -1,0 +1,1 @@
+Please implement split_sections() for the biomedical workshop pipeline. Preserve headings, body text, and source locations under a documented heading convention. Detect duplicate headings that would otherwise overwrite content and return an explicit ambiguity for review. Keep this step focused on the named function and explain its input/output contract.

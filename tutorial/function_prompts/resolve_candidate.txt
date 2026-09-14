@@ -1,0 +1,1 @@
+Please implement resolve_candidate() for the biomedical workshop pipeline. Resolve relative paths against an explicit project base directory, preserving absolute paths appropriately. Return a canonical candidate for containment checking; do not use the current working directory implicitly. Keep this step focused on the named function and explain its input/output contract.

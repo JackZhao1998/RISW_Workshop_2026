@@ -1,0 +1,59 @@
+# Local project context and assistant/editor state
+project_protocol.md
+.codex/
+.claude/
+.idea/
+.vscode/
+VideoWorkspace/
+
+# Credentials and private local material
+.env
+.env.*
+!.env.example
+credentials.json
+credentials.*.json
+secrets.json
+secrets.*
+*.pem
+*.key
+*.p12
+*.pfx
+id_rsa
+id_ed25519
+private/
+local/
+
+# Generated outputs may contain absolute machine paths and command logs
+output/
+outputs/
+*.log
+
+# Only the reviewed synthetic workshop fixtures belong in Git
+**/data/*
+!/Agentic Pipeline Demo/data/adsl.csv
+!/Agentic Pipeline Demo/data/adeff_results.csv
+!/Agentic Pipeline Demo/data/adeff_week24_pass.csv
+
+# Python environments, build artifacts, and caches
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+env/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.ipynb_checkpoints/
+.coverage
+htmlcov/
+build/
+dist/
+*.egg-info/
+
+# OS metadata and temporary files
+.DS_Store
+Thumbs.db
+Desktop.ini
+*.tmp
+*.bak
+*~

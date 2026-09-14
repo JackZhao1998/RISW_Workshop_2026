@@ -1,0 +1,1 @@
+Please implement norm() for the biomedical workshop pipeline. Resolve the path and apply platform-appropriate case handling without changing the actual filesystem. Document unresolved-link behavior and use this consistently with the containment checker. Keep this step focused on the named function and explain its input/output contract.

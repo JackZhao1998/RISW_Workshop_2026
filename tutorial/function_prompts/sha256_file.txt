@@ -1,0 +1,1 @@
+Please implement sha256_file() for the biomedical workshop pipeline. Read the file in binary chunks and return a SHA-256 hex digest without modifying it. Report missing or unreadable files explicitly; describe the hash as content identity, not a signature or proof of who produced it. Keep this step focused on the named function and explain its input/output contract.

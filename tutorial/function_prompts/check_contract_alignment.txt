@@ -1,0 +1,1 @@
+Please implement check_contract_alignment() for the biomedical workshop pipeline. Check study, model, formula, outcome, treatment, baseline, and contrast against the independently loaded contract. List mismatches and missing mandatory values; two absent values must not count as agreement. Keep this step focused on the named function and explain its input/output contract.

@@ -1,0 +1,5 @@
+Please add a small shared helper module for the pipeline's run state and provenance. I need helpers to load and validate JSON, write JSON outputs, calculate SHA-256 file fingerprints, record UTC timestamps, and describe an artifact by its relative path and fingerprint.
+
+Define a per-run manifest with a run ID, selected input files, component versions, stage status, decisions, and generated artifacts. Use input fingerprints as explicit content-version identifiers for this workshop; do not describe uncommitted files as Git versions.
+
+Keep source inputs read-only and generated state inside the chosen output directory. Reject an output location that would overwrite SAP.md or files under data/. Record failures as well as successful stages. Do not include account details or machine configuration in shareable manifests. Add focused checks for changed inputs, invalid JSON, and a prohibited output destination. Build only these utilities and the state format for now.

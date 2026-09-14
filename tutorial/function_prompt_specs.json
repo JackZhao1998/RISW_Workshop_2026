@@ -1,0 +1,222 @@
+{
+  "_clean_values": [
+    "Normalize text for QC.",
+    "Return a cleaned string Series with whitespace removed and an explicit missing-value policy. Preserve the original Series; this function must not edit the source DataFrame."
+  ],
+  "_load_contract": [
+    "Load the QC contract.",
+    "Accept a dictionary or JSON path, validate the expected top-level contract structure, and report malformed or missing content clearly. Do not treat arbitrary document strings as executable expressions."
+  ],
+  "_parse_equality_filter": [
+    "Parse the QC population rule.",
+    "Support only a documented column-equals-quoted-value grammar and return the column and value. Reject unsupported syntax instead of using eval or guessing a filter."
+  ],
+  "_row": [
+    "Construct one QC finding.",
+    "Return a dictionary with task, term, dataset, expected, observed, pass_flag, status, severity, details, and source_section. Keep status and pass_flag consistent and preserve meaningful observed values."
+  ],
+  "_source": [
+    "Read the source anchor for a contract field.",
+    "Return the source section for the requested field and handle missing field metadata explicitly. Do not fabricate a section when none was extracted."
+  ],
+  "_unique_values": [
+    "Inspect categorical values.",
+    "Return deterministic unique nonempty cleaned values for a requested DataFrame column. Define the behavior for an absent column and avoid modifying the DataFrame."
+  ],
+  "_value": [
+    "Read a contract value for QC.",
+    "Read a named field from analysis_contract while distinguishing an absent value from valid false, zero, or empty values. Require callers to handle missing mandatory fields rather than silently assuming readiness."
+  ],
+  "add_check": [
+    "Accumulate a review finding.",
+    "Append a structured review finding with expected and observed evidence, PASS/FAIL, severity, and explanation. Keep the decision fields consistent; do not convert a skipped mandatory check into PASS."
+  ],
+  "all_bullets": [
+    "Read list entries from a SAP section.",
+    "Extract list entries in source order without inventing text. Document support for bullet and numbered lists, and preserve enough source location information for later evidence checks."
+  ],
+  "artifact": [
+    "Describe an input or output artifact.",
+    "Return its relative path, existence, and SHA-256 fingerprint. Report missing artifacts explicitly and never describe a missing file as verified."
+  ],
+  "build_analysis_dataset": [
+    "Select and join the analysis records.",
+    "Apply the validated population and endpoint rules, including ANL01FL = Y, and join by USUBJID with one-to-one validation. Preserve source DataFrames, account for exclusions, and reject nonfinite model inputs or unrecognized treatments. Return the selected rows and the information needed to reconcile counts with QC."
+  ],
+  "bullet_value": [
+    "Extract a labeled SAP item.",
+    "Read the value following a specific label in a Markdown list. Escape the label when matching text and expose absent or repeated conflicting labels for review instead of selecting a value silently."
+  ],
+  "bullets_after_phrase": [
+    "Extract a required-variable list.",
+    "Find the designated introductory phrase and collect only its following list, stopping at the next section or unrelated text. Preserve order and detect absence explicitly."
+  ],
+  "check_contract_alignment": [
+    "Compare the result with the authorized contract.",
+    "Check study, model, formula, outcome, treatment, baseline, and contrast against the independently loaded contract. List mismatches and missing mandatory values; two absent values must not count as agreement."
+  ],
+  "check_final_report_text": [
+    "Review the draft's claims.",
+    "Flag unsupported clinical or regulatory claims while retaining context, including negation and quoted examples. Record whether text was actually reviewed; describe keyword matches as review flags rather than complete scientific validation."
+  ],
+  "check_provenance": [
+    "Review the result's input identities.",
+    "Check the recorded contract, QC summary, subject-data, and efficacy-data paths and hashes against current files. Also reconcile them with the QC input identities; self-reported flags alone are insufficient."
+  ],
+  "check_qc_gate_consistency": [
+    "Reconcile the gate and execution state.",
+    "Verify that BLOCK never produced a fitted result and that COMPLETED required a valid ALLOW. Recognize FAILED explicitly, and reject contradictory counts, failed checks, or result fields."
+  ],
+  "check_sap_contract_against_data": [
+    "Evaluate data readiness deterministically.",
+    "Accept a validated contract and read-only subject/efficacy DataFrames. Return a term-level QC table covering required fields, population, treatments, endpoint availability, duplicates, joins, numeric inputs, and documented consistency tolerances. Use explicit failures for unsupported or incomplete checks and keep all source data unchanged."
+  ],
+  "check_source_data_handling": [
+    "Verify input preservation.",
+    "Compare source fingerprints before and after the workflow and report any mismatch. Keep declared mutation flags as supplementary metadata rather than accepting them as proof that files were untouched."
+  ],
+  "check_statistical_result": [
+    "Check numerical result consistency.",
+    "For completed analysis, validate finite estimates and standard errors, confidence interval bounds, p-value range, positive residual degrees of freedom, and agreement of N with both arm counts and QC. Check internal estimate/SE/t/p consistency using the recorded inference settings. Blocked analysis must contain no fitted estimates."
+  ],
+  "clean_values": [
+    "Normalize text for analysis selection.",
+    "Return trimmed string values with a documented missing-value representation, without changing the caller's Series. Keep normalization consistent with the QC helper."
+  ],
+  "code_or_text_formula": [
+    "Extract the stated model formula.",
+    "Read a supported fenced formula or explicit model line and preserve it as text. Expose missing or conflicting formulas for review; never execute a formula extracted from a document."
+  ],
+  "collect_path_candidates": [
+    "Collect declared file-operation targets.",
+    "Traverse the structured tool event and return all relevant input and output path fields, including nested lists and objects. Document the accepted event structure and reject ambiguous events at the policy layer."
+  ],
+  "command_has_mutating_pattern": [
+    "Flag suspicious shell operations.",
+    "Detect common mutation operators for diagnostic purposes. Document false positives and bypass limits, and keep this heuristic supplementary to structured operation validation rather than treating it as a shell sandbox."
+  ],
+  "command_mentions_data_dir": [
+    "Identify shell references to protected data.",
+    "Recognize supported path spellings for the protected directory and return a diagnostic match. Document that substring matching cannot prove a command's safety or resolve every shell expansion."
+  ],
+  "contract_value": [
+    "Read a contract value for analysis.",
+    "Retrieve the named value from a validated contract and report missing required values explicitly. Do not supply an unstated model, contrast, or population default."
+  ],
+  "decide_release": [
+    "Choose the final review outcome.",
+    "Return FAIL for failed mandatory checks or inconsistent artifacts, BLOCK for a correctly blocked analysis, and PASS only for a completed result with all required reviews satisfied. Do not equate ALLOW with successful completion."
+  ],
+  "evidence": [
+    "Preserve a source evidence snippet.",
+    "Create a readable source snippet without changing its meaning. Retain an anchor to the original text, indicate truncation, and avoid cutting off a qualification that is needed to support the extracted claim."
+  ],
+  "extract_contract": [
+    "Coordinate deterministic SAP extraction.",
+    "Read the supported Markdown SAP, call the section and field helpers, and construct the agreed contract schema with evidence, extraction status, unresolved fields, and source fingerprint. Validate the result and do not inspect CSVs or infer data readiness."
+  ],
+  "field": [
+    "Construct one source-supported contract field.",
+    "Return value, source_section, evidence, and FOUND/NOT_FOUND/AMBIGUOUS status. Preserve valid falsy values and explicitly represent missing or conflicting information without inventing evidence."
+  ],
+  "field_value": [
+    "Read a contract value during final review.",
+    "Retrieve a named field for comparison with the result. Expose missing or malformed fields so the alignment check can fail explicitly rather than treating absence as agreement."
+  ],
+  "find_demo_root": [
+    "Locate the project from a script path.",
+    "Search the script directory and its ancestors for the component's required project markers. Return the verified project root or a clear error without hard-coding a user's local path."
+  ],
+  "find_section": [
+    "Look up a SAP section.",
+    "Find a named section using a documented heading-normalization rule. Preserve section identity for evidence and handle absent or duplicate ambiguous headings explicitly."
+  ],
+  "fit_ancova_ols": [
+    "Fit the authorized toy ANCOVA.",
+    "Fit an intercept, explicit treatment indicator, and baseline covariate using stable linear algebra. Validate finite data, full rank, both treatment arms, and positive residual degrees of freedom. Return full-precision coefficients, uncertainty, t inference, and diagnostics with recorded workshop settings. Treat this as an internal numerical function behind the gated public entry point."
+  ],
+  "infer_contrast_labels": [
+    "Resolve active and reference treatments.",
+    "Parse the explicit contract contrast and check both labels against permitted treatments. Return active and reference labels in the stated direction; reject ambiguity rather than using alphabetical order or list position as an unstated default."
+  ],
+  "is_inside_or_equal": [
+    "Check protected-path containment.",
+    "Compare resolved paths using platform-appropriate path semantics, accepting the directory itself as inside. Handle '..' and resolved links where supported, and ensure a sibling with a similar prefix is not misclassified as a child."
+  ],
+  "load_event": [
+    "Read a proposed tool event.",
+    "Read JSON from an explicit file or standard input and validate its required tool-operation fields. Return a structured error for missing or malformed events so the hook can fail closed."
+  ],
+  "load_json": [
+    "Load structured pipeline artifacts.",
+    "Accept the documented path/object input forms, return a JSON object, and reject malformed or unsupported content clearly. Keep loading separate from artifact-specific schema validation."
+  ],
+  "looks_like_path": [
+    "Recognize a possible path token.",
+    "Implement this only as a candidate-detection heuristic for the documented event format. Avoid treating a negative heuristic result as authorization to execute an otherwise unclassified operation."
+  ],
+  "main": [
+    "Expose the component's CLI.",
+    "Use argparse for the component's documented input/output flags, validate paths and schemas, call its public helper, and write structured status and useful exit behavior. Preserve the analysis gate in analysis entry points, reject protected output locations, and avoid embedding scientific logic in the CLI."
+  ],
+  "make_summary": [
+    "Summarize the QC table.",
+    "Validate that all required checks exist, then summarize status counts, failed terms, endpoint/population counts, and matching contract/input fingerprints. ALLOW only a complete passing set of required checks; an empty or malformed table must BLOCK."
+  ],
+  "norm": [
+    "Normalize a path for policy checks.",
+    "Resolve the path and apply platform-appropriate case handling without changing the actual filesystem. Document unresolved-link behavior and use this consistently with the containment checker."
+  ],
+  "parse_equality_filter": [
+    "Parse the analysis population rule.",
+    "Support the same explicit equality grammar as QC, return the column and value, and raise a clear error for unsupported syntax. Do not evaluate arbitrary source strings."
+  ],
+  "require_qc_allow": [
+    "Enforce the pre-analysis decision.",
+    "Validate complete QC evidence, current contract/data identities, and required checks. Recheck deterministic QC on the exact selected inputs in the controlled workflow. Return allowed status and reasons, failing closed for missing, stale, edited, or contradictory evidence. Expand the interface if needed to perform these checks."
+  ],
+  "require_success": [
+    "Validate a subprocess stage outcome.",
+    "Raise or return a structured failure for nonzero process status and retain the command's useful error output. Keep domain decisions such as BLOCK or FAIL separate: a zero exit status does not mean analysis was allowed or the result passed review."
+  ],
+  "resolve_candidate": [
+    "Resolve an event path.",
+    "Resolve relative paths against an explicit project base directory, preserving absolute paths appropriately. Return a canonical candidate for containment checking; do not use the current working directory implicitly."
+  ],
+  "resolve_embedded_contract": [
+    "Locate the contract used for review.",
+    "Prefer an explicit contract path when supplied, otherwise use a validated recorded path. Check existence, schema, and the expected fingerprint before trusting it. Report mismatched explicit and recorded identities."
+  ],
+  "run_ancova_if_qc_passes": [
+    "Provide the gated analysis entry point.",
+    "Validate the contract and QC evidence, invoke the pre-analysis gate, and return BLOCKED without constructing or fitting the model when disallowed. On ALLOW, use the exact verified inputs, call the dataset builder and numerical fitter, and return a structured COMPLETED or FAILED record with provenance and no fabricated results."
+  ],
+  "run_command": [
+    "Run one known pipeline stage.",
+    "Execute a list of arguments without shell string interpolation, using an explicit working directory. Capture status, stdout, and stderr, and return structured evidence for the manifest. Limit the dispatcher to approved component calls and perform the relevant hook checks before dispatch."
+  ],
+  "run_final_result_review_hook": [
+    "Coordinate final result review.",
+    "Load and validate the contract, QC evidence, result, and optional draft report, call each review function, and return checks plus PASS/BLOCK/FAIL. Preserve malformed-input failures as review artifacts and record exactly which draft text was reviewed."
+  ],
+  "run_pre_tool_data_security_hook": [
+    "Decide whether a file operation may run.",
+    "Validate a structured tool event, resolve every target, and allow only classified reads against protected SAP/data sources. Block mutations and unknown operations with reasons. Return a JSON decision for the controlled dispatcher and document that callers must enforce it."
+  ],
+  "sha256_file": [
+    "Fingerprint a file's bytes.",
+    "Read the file in binary chunks and return a SHA-256 hex digest without modifying it. Report missing or unreadable files explicitly; describe the hash as content identity, not a signature or proof of who produced it."
+  ],
+  "split_sections": [
+    "Split a Markdown SAP into sections.",
+    "Preserve headings, body text, and source locations under a documented heading convention. Detect duplicate headings that would otherwise overwrite content and return an explicit ambiguity for review."
+  ],
+  "utc_now": [
+    "Record a portable timestamp.",
+    "Return a timezone-aware UTC timestamp in a consistent ISO 8601 format. Keep it free of local account or machine metadata."
+  ],
+  "verify_hash_from_result": [
+    "Verify one recorded file fingerprint.",
+    "Require a valid path and expected SHA-256, hash the current file, and append a clear PASS/FAIL finding. Missing, unreadable, or changed files must produce explicit failed provenance checks."
+  ]
+}

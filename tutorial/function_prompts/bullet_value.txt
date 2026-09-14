@@ -1,0 +1,1 @@
+Please implement bullet_value() for the biomedical workshop pipeline. Read the value following a specific label in a Markdown list. Escape the label when matching text and expose absent or repeated conflicting labels for review instead of selecting a value silently. Keep this step focused on the named function and explain its input/output contract.

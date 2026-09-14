@@ -1,0 +1,1 @@
+Please implement _value() for the biomedical workshop pipeline. Read a named field from analysis_contract while distinguishing an absent value from valid false, zero, or empty values. Require callers to handle missing mandatory fields rather than silently assuming readiness. Keep this step focused on the named function and explain its input/output contract.

@@ -1,0 +1,114 @@
+[
+  {
+    "requirements": [
+      "Create the project protocol and build plan",
+      "Preserve the supplied SAP and CSVs",
+      "Ignore local guidance, secrets, and generated outputs"
+    ],
+    "speech": "Ask the coding agent to inspect the existing inputs and write the project protocol first. The request also asks for Git exclusions, so generated files and private material stay out of the source repository. Review the proposed component order before asking it to implement the first skill."
+  },
+  {
+    "requirements": [
+      "Define when to use the skill and its procedure",
+      "Require values, source evidence, and field status",
+      "Keep unknowns explicit; stop before data QC"
+    ],
+    "speech": "The construction request should specify both the skill's procedure and its output format. Ask for a value, source section, evidence, and status for every field. The agent should identify missing or ambiguous information instead of guessing. At this stage, it should not open the data or make a readiness decision."
+  },
+  {
+    "requirements": [
+      "Parse the supported Markdown structure",
+      "Preserve field evidence and SAP fingerprints",
+      "Validate missing, conflicting, and unsupported fields"
+    ],
+    "speech": "Ask for a small extractor tailored to the supplied Markdown layout, plus contract validation. The important edge cases are missing fields, conflicting values, and unsupported evidence. A numbered readiness list should be handled as carefully as a bullet list. The resulting contract is an artifact the learner can inspect before continuing."
+  },
+  {
+    "requirements": [
+      "Share JSON, timestamp, and hashing utilities",
+      "Record a run ID, stages, decisions, and artifacts",
+      "Reject output paths that overwrite source inputs"
+    ],
+    "speech": "Ask for shared utilities and a per-run manifest. The manifest should identify selected inputs, component versions, stage decisions, and output artifacts. It should also preserve failures, because an interrupted workflow still needs an explanation. Make output-path validation part of the shared utilities so every component protects the supplied sources."
+  },
+  {
+    "requirements": [
+      "Review structured operations before dispatch",
+      "Resolve paths and reject protected mutations",
+      "Document enforcement boundaries and test them"
+    ],
+    "speech": "Ask the coding agent to build a function that receives a structured operation and returns allow or block with reasons. Test a permitted read and several prohibited changes using temporary files. The harness must enforce the returned decision before execution. A standalone policy function does not protect operations that bypass it."
+  },
+  {
+    "requirements": [
+      "Require the contract and explicit dataset selection",
+      "Call the deterministic QC helper",
+      "Explain missing endpoints without changing data"
+    ],
+    "speech": "The prompt asks for a skill that guides data readiness, including an explicit efficacy-file choice. It must not repair a failed example by silently substituting a different file. It should explain the expected population, the missing endpoint records, and the selected workshop policy. This is the procedure the agent follows around the QC tool."
+  },
+  {
+    "requirements": [
+      "Return expected versus observed checks",
+      "Check schema, population, joins, and numeric inputs",
+      "Emit a complete QC table and matching summary"
+    ],
+    "speech": "Ask for one row per deterministic check, with expected and observed values and a clear explanation. Require the helper to detect duplicate endpoint records and unusable model values as well as missing visits. The summary must include counts and matching input fingerprints. An empty or incomplete checking table must not authorize analysis."
+  },
+  {
+    "requirements": [
+      "Validate current evidence, not just an ALLOW label",
+      "Recheck QC on the exact inputs selected for analysis",
+      "Prove blocked paths never call the fit function"
+    ],
+    "speech": "The construction prompt should require the gate to verify the current contract and input identities. It should rerun QC on the exact data that will be analyzed. Ask for a test that tracks calls to the fitting function and proves there are none on blocked paths. This makes the control observable."
+  },
+  {
+    "requirements": [
+      "Build the authorized population and endpoint",
+      "Fit the stated treatment contrast with stable OLS",
+      "Record uncertainty, diagnostics, and workshop choices"
+    ],
+    "speech": "Ask the agent to implement separate dataset-building and model-fitting functions. Specify Placebo as the reference, and the active treatment minus Placebo as the contrast. Require checks for rank deficiency and insufficient residual degrees of freedom. The JSON should preserve full precision, while confidence level and inference settings remain clearly labeled workshop choices."
+  },
+  {
+    "requirements": [
+      "Create skill guidance and a thin CLI wrapper",
+      "Require contract, QC evidence, and selected inputs",
+      "Keep every supported entry point gated"
+    ],
+    "speech": "The skill and command-line wrapper should use the existing gated helper. Ask the coding agent to document the inputs and return structured blocked, completed, or failed outcomes. Direct command-line use must still enforce the same gate. Keeping the wrapper thin avoids duplicating scientific logic in multiple places."
+  },
+  {
+    "requirements": [
+      "Reconcile gate, contract, inputs, and result",
+      "Check statistical consistency and draft claims",
+      "Return PASS, BLOCK, or FAIL with evidence"
+    ],
+    "speech": "Ask for separate review functions so the learner can see what is being checked. The checks should reconcile the analysis with its contract, verify provenance, and validate numerical consistency. A correctly blocked analysis receives a block decision and an issue report. An inconsistent result receives a fail decision and must not be reported as success."
+  },
+  {
+    "requirements": [
+      "Write completed, blocked, and diagnostic reports",
+      "Use structured results as the source of numbers",
+      "Release only the exact draft that passed review"
+    ],
+    "speech": "Request a report writer that uses the structured artifacts as its source of truth. A completed branch reports verified numbers. A blocked branch explains missing requirements without displaying estimates. A failed review produces diagnostics. The writer should produce a draft first and release the same text only after its review is complete."
+  },
+  {
+    "requirements": [
+      "Connect the skills, tools, hooks, and state",
+      "Handle blocked and failed stages explicitly",
+      "Record a manifest and release the reviewed report"
+    ],
+    "speech": "Ask the coding agent to wire the components together through the workflow skill and orchestrator. The user still chooses the efficacy file. The controller should keep a manifest even when a stage fails, and distinguish process exit codes from analysis decisions. A command can finish normally while its domain decision is block."
+  },
+  {
+    "requirements": [
+      "Document both supplied dataset branches",
+      "Verify the no-fit behavior and final artifacts",
+      "Keep expected outcomes separate from observed results"
+    ],
+    "speech": "The final prompt asks for a learner walkthrough and acceptance checks. The missing-Week-24 case must block fitting. The complete-Week-24 case must earn its passing decision through the checks. Also request failure cases for stale evidence and inconsistent results. When learners execute these requests, their coding agent should report what actually happened."
+  }
+]

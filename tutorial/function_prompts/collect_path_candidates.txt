@@ -1,0 +1,1 @@
+Please implement collect_path_candidates() for the biomedical workshop pipeline. Traverse the structured tool event and return all relevant input and output path fields, including nested lists and objects. Document the accepted event structure and reject ambiguous events at the policy layer. Keep this step focused on the named function and explain its input/output contract.

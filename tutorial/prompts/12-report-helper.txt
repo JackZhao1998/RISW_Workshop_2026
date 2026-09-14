@@ -1,0 +1,5 @@
+Please add reporting_helpers.py with a report builder that uses the contract, QC summary, analysis result, and review decision. Produce a readable Markdown report with the question, selected input files, SAP evidence, readiness findings, analysis settings, provenance, and limitations.
+
+For a completed result that passes review, report the verified estimate, confidence interval, p value, N, and treatment counts using consistent display precision. For BLOCK, write an issue report explaining the failed requirements and why analysis did not run; omit treatment estimates. For FAIL, write a diagnostic report identifying the inconsistencies without presenting the result as released.
+
+Keep workshop choices distinct from SAP statements and explain that the supplied data are fictional. Generate a draft first, allow the review hook to check its exact text, and release that reviewed version. Add checks for all three branches and verify that report numbers are taken from the structured result rather than recomputed or invented.

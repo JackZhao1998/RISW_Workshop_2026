@@ -1,0 +1,1 @@
+Please implement find_demo_root() for the biomedical workshop pipeline. Search the script directory and its ancestors for the component's required project markers. Return the verified project root or a clear error without hard-coding a user's local path. Keep this step focused on the named function and explain its input/output contract.

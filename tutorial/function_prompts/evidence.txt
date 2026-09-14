@@ -1,0 +1,1 @@
+Please implement evidence() for the biomedical workshop pipeline. Create a readable source snippet without changing its meaning. Retain an anchor to the original text, indicate truncation, and avoid cutting off a qualification that is needed to support the extracted claim. Keep this step focused on the named function and explain its input/output contract.

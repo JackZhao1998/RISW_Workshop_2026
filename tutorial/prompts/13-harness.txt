@@ -1,0 +1,7 @@
+Now create skills/biomed-analysis-workflow/SKILL.md and run_biomed_analysis_workflow.py to connect the components we have built.
+
+Accept the SAP, explicitly selected subject and efficacy files, and an output directory. Coordinate extraction and contract validation, protected file operations, deterministic QC, the pre-analysis gate, ANCOVA when allowed, result review, draft reporting, and final text review. Release a successful report only after the required reviews pass. On a block, skip model fitting and produce the reviewed issue report. Never switch to another efficacy file automatically.
+
+Record every stage, decision, command outcome, and artifact fingerprint in a run manifest, including when a stage fails. Reject source-overwriting output paths and verify source fingerprints before and after the run. Add end-to-end checks for both supplied dataset branches and an injected stage failure.
+
+Explain how a coding agent uses the workflow skill to turn a user's goal into this tool call. Keep the Python harness provider-neutral; a hosted-model API integration is not required.

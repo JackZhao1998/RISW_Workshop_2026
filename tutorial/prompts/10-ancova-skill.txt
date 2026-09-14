@@ -1,0 +1,5 @@
+Create skills/ancova-test/SKILL.md and its run_ancova_test.py wrapper around the helpers we just built. Explain the required contract, QC evidence, subject data, and efficacy data inputs, and when the agent may use the skill.
+
+Expose --contract, --qc-summary, --subject-data, --efficacy-data, and --output-json. The wrapper must call the gated analysis entry point, use the source-data protection checks, reject protected output destinations, and preserve provenance. It should return structured BLOCKED, COMPLETED, or FAILED results with useful exit behavior and explanations.
+
+Document that a blocked case has no treatment estimates. The skill must not ask the agent to bypass QC, substitute datasets, or try alternate models automatically. Include a short usage example and checks that direct CLI use still enforces the gate. Build only this skill and wrapper now.

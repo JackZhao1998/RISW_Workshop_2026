@@ -1,0 +1,4 @@
+interface:
+  display_name: "SAP Contract Extractor"
+  short_description: "Extract structured SAP analysis contracts"
+  default_prompt: "Use $sap-contract-extractor to extract a structured SAP analysis contract from a SAP markdown file."

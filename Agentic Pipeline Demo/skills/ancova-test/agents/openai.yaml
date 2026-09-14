@@ -1,0 +1,4 @@
+interface:
+  display_name: "ANCOVA Test"
+  short_description: "Run QC-gated primary ANCOVA"
+  default_prompt: "Use $ancova-test to run the SAP-specified ANCOVA only after data QC returns ALLOW."

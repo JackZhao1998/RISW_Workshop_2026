@@ -1,0 +1,1 @@
+Please implement field_value() for the biomedical workshop pipeline. Retrieve a named field for comparison with the result. Expose missing or malformed fields so the alignment check can fail explicitly rather than treating absence as agreement. Keep this step focused on the named function and explain its input/output contract.

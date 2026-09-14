@@ -1,0 +1,5 @@
+Now implement skills/sap-extractor/scripts/extract_sap_contract.py for the Markdown layout in our supplied SAP. Keep it small and explain the supported document format rather than claiming it can understand every SAP.
+
+Use separate helpers to read sections, extract labeled values and lists, capture formulas, and attach source evidence. Handle both bullet lists and numbered readiness criteria. Produce sap_analysis_contract.json with a schema version, extraction status, fields needing review, and the SAP fingerprint. Add schema validation and checks that the cited evidence exists and supports the extracted value; document which judgments still need the agent's review.
+
+Provide a command-line interface with --sap and --output. Test the supplied excerpt, a missing required field, and a conflicting or unsupported value using temporary test copies. Unknown requirements should remain explicit. Do not inspect the CSVs or run analysis yet.

@@ -1,0 +1,7 @@
+* text=auto eol=lf
+*.mp4 -text
+*.m4a -text
+*.mp3 -text
+*.png -text
+"Agentic Pipeline Demo/SAP.md" -text
+"Agentic Pipeline Demo/data/*.csv" -text

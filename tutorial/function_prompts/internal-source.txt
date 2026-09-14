@@ -1,0 +1,1 @@
+Please implement _source() for the biomedical workshop pipeline. Return the source section for the requested field and handle missing field metadata explicitly. Do not fabricate a section when none was extracted. Keep this step focused on the named function and explain its input/output contract.

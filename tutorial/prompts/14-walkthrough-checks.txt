@@ -1,0 +1,5 @@
+Please finish the workshop README and acceptance checks for the pipeline. Show how to use the supplied SAP and adsl.csv with each efficacy file in a separate output directory.
+
+For adeff_results.csv, demonstrate that missing Week 24 data cause BLOCK, the fitting function is never called, and the report contains reasons rather than estimates. For adeff_week24_pass.csv, require all checks to pass before fitting and verify the final review and report against the generated result. Do not predeclare success from the filename.
+
+Also cover stale or edited QC evidence, missing contract fields, protected-source write attempts, an analysis failure, and post-review inconsistencies using temporary copies or stubs. Verify the original input hashes remain unchanged. Document dependencies and exact commands. Clearly separate expected behavior from the results actually observed when the tests run, and report any remaining limitations. Do not generate new source datasets or publish anything.

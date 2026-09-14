@@ -1,0 +1,1 @@
+Please implement _parse_equality_filter() for the biomedical workshop pipeline. Support only a documented column-equals-quoted-value grammar and return the column and value. Reject unsupported syntax instead of using eval or guessing a filter. Keep this step focused on the named function and explain its input/output contract.

@@ -1,0 +1,420 @@
+{
+  "inspection": "read-only; no pipeline execution",
+  "files": {
+    "ancova_helpers.py": {
+      "sha256": "2e1121c5e24531b8b21676ff5ce77e704ead86aa66386154f4200da7e5978d63",
+      "functions": [
+        {
+          "name": "utc_now",
+          "line": 18,
+          "signature": "utc_now()"
+        },
+        {
+          "name": "sha256_file",
+          "line": 22,
+          "signature": "sha256_file(path: Path)"
+        },
+        {
+          "name": "load_json",
+          "line": 30,
+          "signature": "load_json(value: str | Path | dict[str, Any])"
+        },
+        {
+          "name": "contract_value",
+          "line": 38,
+          "signature": "contract_value(contract: dict[str, Any], key: str, default: Any=None)"
+        },
+        {
+          "name": "clean_values",
+          "line": 42,
+          "signature": "clean_values(series: pd.Series)"
+        },
+        {
+          "name": "parse_equality_filter",
+          "line": 46,
+          "signature": "parse_equality_filter(expression: str)"
+        },
+        {
+          "name": "infer_contrast_labels",
+          "line": 53,
+          "signature": "infer_contrast_labels(contract: dict[str, Any])"
+        },
+        {
+          "name": "require_qc_allow",
+          "line": 64,
+          "signature": "require_qc_allow(qc_summary: dict[str, Any])"
+        },
+        {
+          "name": "build_analysis_dataset",
+          "line": 70,
+          "signature": "build_analysis_dataset(contract: dict[str, Any], subject_df: pd.DataFrame, efficacy_df: pd.DataFrame, active_label: str, reference_label: str)"
+        },
+        {
+          "name": "fit_ancova_ols",
+          "line": 111,
+          "signature": "fit_ancova_ols(analysis_df: pd.DataFrame, *, outcome: str, baseline: str)"
+        },
+        {
+          "name": "run_ancova_if_qc_passes",
+          "line": 166,
+          "signature": "run_ancova_if_qc_passes(sap_contract_json: str | Path | dict[str, Any], qc_summary_json: str | Path | dict[str, Any], subject_df: pd.DataFrame, efficacy_df: pd.DataFrame, *, subject_dataset_name: str='adsl', efficacy_dataset_name: str='adeff')"
+        },
+        {
+          "name": "main",
+          "line": 272,
+          "signature": "main()"
+        }
+      ]
+    },
+    "data_qc_helpers.py": {
+      "sha256": "7c3319ca1bf637cb4bfcd6a9d7f9ffae6615e2eac3c6b98b708f216d445894a7",
+      "functions": [
+        {
+          "name": "_load_contract",
+          "line": 20,
+          "signature": "_load_contract(sap_contract_json: str | Path | dict[str, Any])"
+        },
+        {
+          "name": "_value",
+          "line": 28,
+          "signature": "_value(payload: dict[str, Any], key: str, default: Any=None)"
+        },
+        {
+          "name": "_source",
+          "line": 33,
+          "signature": "_source(payload: dict[str, Any], key: str)"
+        },
+        {
+          "name": "_clean_values",
+          "line": 38,
+          "signature": "_clean_values(series: pd.Series)"
+        },
+        {
+          "name": "_unique_values",
+          "line": 42,
+          "signature": "_unique_values(df: pd.DataFrame, column: str)"
+        },
+        {
+          "name": "_parse_equality_filter",
+          "line": 49,
+          "signature": "_parse_equality_filter(expression: str)"
+        },
+        {
+          "name": "_row",
+          "line": 56,
+          "signature": "_row(task: str, term: str, dataset: str, expected: Any, observed: Any, passed: bool, details: str, source_section: str='', severity: str='ERROR')"
+        },
+        {
+          "name": "check_sap_contract_against_data",
+          "line": 81,
+          "signature": "check_sap_contract_against_data(sap_contract_json: str | Path | dict[str, Any], subject_df: pd.DataFrame, efficacy_df: pd.DataFrame, *, subject_dataset_name: str='adsl', efficacy_dataset_name: str='adeff')"
+        },
+        {
+          "name": "main",
+          "line": 417,
+          "signature": "main()"
+        }
+      ]
+    },
+    "hooks/final_result_review_hook.py": {
+      "sha256": "bac0264a39dc0668ba51592886e9725a3ce09a3e0eee110ab9091e113d060e10",
+      "functions": [
+        {
+          "name": "utc_now",
+          "line": 42,
+          "signature": "utc_now()"
+        },
+        {
+          "name": "load_json",
+          "line": 46,
+          "signature": "load_json(path: Path)"
+        },
+        {
+          "name": "sha256_file",
+          "line": 51,
+          "signature": "sha256_file(path: Path)"
+        },
+        {
+          "name": "field_value",
+          "line": 59,
+          "signature": "field_value(contract: dict[str, Any], key: str)"
+        },
+        {
+          "name": "add_check",
+          "line": 63,
+          "signature": "add_check(checks: list[dict[str, Any]], *, hook: str, term: str, passed: bool, expected: Any, observed: Any, details: str, severity: str='ERROR')"
+        },
+        {
+          "name": "check_qc_gate_consistency",
+          "line": 88,
+          "signature": "check_qc_gate_consistency(result: dict[str, Any], checks: list[dict[str, Any]])"
+        },
+        {
+          "name": "check_contract_alignment",
+          "line": 131,
+          "signature": "check_contract_alignment(result: dict[str, Any], contract: dict[str, Any] | None, checks: list[dict[str, Any]])"
+        },
+        {
+          "name": "verify_hash_from_result",
+          "line": 178,
+          "signature": "verify_hash_from_result(checks: list[dict[str, Any]], *, hook: str, term: str, path_value: str | None, expected_hash: str | None)"
+        },
+        {
+          "name": "check_provenance",
+          "line": 225,
+          "signature": "check_provenance(result: dict[str, Any], checks: list[dict[str, Any]])"
+        },
+        {
+          "name": "check_source_data_handling",
+          "line": 260,
+          "signature": "check_source_data_handling(result: dict[str, Any], checks: list[dict[str, Any]])"
+        },
+        {
+          "name": "check_statistical_result",
+          "line": 290,
+          "signature": "check_statistical_result(result: dict[str, Any], checks: list[dict[str, Any]])"
+        },
+        {
+          "name": "check_final_report_text",
+          "line": 394,
+          "signature": "check_final_report_text(report_text: str | None, checks: list[dict[str, Any]])"
+        },
+        {
+          "name": "resolve_embedded_contract",
+          "line": 426,
+          "signature": "resolve_embedded_contract(result: dict[str, Any], explicit_path: Path | None)"
+        },
+        {
+          "name": "decide_release",
+          "line": 436,
+          "signature": "decide_release(checks: list[dict[str, Any]], result: dict[str, Any])"
+        },
+        {
+          "name": "run_final_result_review_hook",
+          "line": 444,
+          "signature": "run_final_result_review_hook(ancova_result_path: Path, *, contract_path: Path | None=None, final_report_path: Path | None=None)"
+        },
+        {
+          "name": "main",
+          "line": 485,
+          "signature": "main()"
+        }
+      ]
+    },
+    "hooks/pre_tool_data_security_hook.py": {
+      "sha256": "d48a894fed6b9edf6fbdd86db7abc065740c19d134399d0c0c199e66257af070",
+      "functions": [
+        {
+          "name": "utc_now",
+          "line": 82,
+          "signature": "utc_now()"
+        },
+        {
+          "name": "norm",
+          "line": 86,
+          "signature": "norm(path: Path)"
+        },
+        {
+          "name": "is_inside_or_equal",
+          "line": 90,
+          "signature": "is_inside_or_equal(path: Path, directory: Path)"
+        },
+        {
+          "name": "looks_like_path",
+          "line": 96,
+          "signature": "looks_like_path(value: str)"
+        },
+        {
+          "name": "collect_path_candidates",
+          "line": 105,
+          "signature": "collect_path_candidates(value: Any)"
+        },
+        {
+          "name": "resolve_candidate",
+          "line": 125,
+          "signature": "resolve_candidate(candidate: str, base_dir: Path)"
+        },
+        {
+          "name": "command_has_mutating_pattern",
+          "line": 132,
+          "signature": "command_has_mutating_pattern(command: str)"
+        },
+        {
+          "name": "command_mentions_data_dir",
+          "line": 136,
+          "signature": "command_mentions_data_dir(command: str, protected_data_dir: Path)"
+        },
+        {
+          "name": "run_pre_tool_data_security_hook",
+          "line": 146,
+          "signature": "run_pre_tool_data_security_hook(*, tool_name: str, operation: str | None=None, tool_arguments: dict[str, Any] | None=None, paths: list[str] | None=None, protected_data_dir: str | Path=DEFAULT_PROTECTED_DATA_DIR, base_dir: str | Path | None=None)"
+        },
+        {
+          "name": "load_event",
+          "line": 228,
+          "signature": "load_event(path: Path | None)"
+        },
+        {
+          "name": "main",
+          "line": 238,
+          "signature": "main()"
+        }
+      ]
+    },
+    "skills/ancova-test/scripts/run_ancova_test.py": {
+      "sha256": "05150ab4774acd91ac7fd786313a16cec3f76bf7d9cff03f09cd62993f63efe2",
+      "functions": [
+        {
+          "name": "find_demo_root",
+          "line": 14,
+          "signature": "find_demo_root(start: Path)"
+        },
+        {
+          "name": "main",
+          "line": 21,
+          "signature": "main()"
+        }
+      ]
+    },
+    "skills/biomed-analysis-workflow/scripts/run_biomed_analysis_workflow.py": {
+      "sha256": "5f63176c454a137aaed981f79de3c20ff27591e628e572d18fa07513e75e3253",
+      "functions": [
+        {
+          "name": "utc_now",
+          "line": 16,
+          "signature": "utc_now()"
+        },
+        {
+          "name": "sha256_file",
+          "line": 20,
+          "signature": "sha256_file(path: Path)"
+        },
+        {
+          "name": "find_demo_root",
+          "line": 28,
+          "signature": "find_demo_root(start: Path)"
+        },
+        {
+          "name": "run_command",
+          "line": 35,
+          "signature": "run_command(command: list[str], *, cwd: Path)"
+        },
+        {
+          "name": "require_success",
+          "line": 51,
+          "signature": "require_success(step: dict[str, Any])"
+        },
+        {
+          "name": "load_json",
+          "line": 62,
+          "signature": "load_json(path: Path)"
+        },
+        {
+          "name": "artifact",
+          "line": 67,
+          "signature": "artifact(path: Path)"
+        },
+        {
+          "name": "main",
+          "line": 75,
+          "signature": "main()"
+        }
+      ]
+    },
+    "skills/data-checker/scripts/run_data_checker.py": {
+      "sha256": "e1ca45f8e1a054ed691f49ce21cad93a10633902fcdf6d6116725be44d930323",
+      "functions": [
+        {
+          "name": "utc_now",
+          "line": 17,
+          "signature": "utc_now()"
+        },
+        {
+          "name": "sha256_file",
+          "line": 21,
+          "signature": "sha256_file(path: Path)"
+        },
+        {
+          "name": "find_demo_root",
+          "line": 29,
+          "signature": "find_demo_root(start: Path)"
+        },
+        {
+          "name": "make_summary",
+          "line": 36,
+          "signature": "make_summary(table: pd.DataFrame, contract_path: Path, subject_path: Path, efficacy_path: Path)"
+        },
+        {
+          "name": "main",
+          "line": 76,
+          "signature": "main()"
+        }
+      ]
+    },
+    "skills/sap-extractor/scripts/extract_sap_contract.py": {
+      "sha256": "41b289003697acb0c55f847aba78dbc5bcd4db5e9d6c321e75a821de58619bea",
+      "functions": [
+        {
+          "name": "sha256_file",
+          "line": 35,
+          "signature": "sha256_file(path: Path)"
+        },
+        {
+          "name": "utc_now",
+          "line": 43,
+          "signature": "utc_now()"
+        },
+        {
+          "name": "split_sections",
+          "line": 47,
+          "signature": "split_sections(markdown: str)"
+        },
+        {
+          "name": "find_section",
+          "line": 61,
+          "signature": "find_section(sections: dict[str, str], name: str)"
+        },
+        {
+          "name": "evidence",
+          "line": 68,
+          "signature": "evidence(text: str, fallback: str='')"
+        },
+        {
+          "name": "field",
+          "line": 75,
+          "signature": "field(value: Any, section: str, evidence_text: str, status: str | None=None)"
+        },
+        {
+          "name": "bullet_value",
+          "line": 91,
+          "signature": "bullet_value(section_text: str, label: str)"
+        },
+        {
+          "name": "code_or_text_formula",
+          "line": 97,
+          "signature": "code_or_text_formula(section_text: str)"
+        },
+        {
+          "name": "bullets_after_phrase",
+          "line": 105,
+          "signature": "bullets_after_phrase(section_text: str, phrase: str)"
+        },
+        {
+          "name": "all_bullets",
+          "line": 119,
+          "signature": "all_bullets(section_text: str)"
+        },
+        {
+          "name": "extract_contract",
+          "line": 123,
+          "signature": "extract_contract(sap_path: Path)"
+        },
+        {
+          "name": "main",
+          "line": 216,
+          "signature": "main()"
+        }
+      ]
+    }
+  }
+}

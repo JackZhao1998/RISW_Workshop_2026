@@ -1,0 +1,1 @@
+Please implement load_event() for the biomedical workshop pipeline. Read JSON from an explicit file or standard input and validate its required tool-operation fields. Return a structured error for missing or malformed events so the hook can fail closed. Keep this step focused on the named function and explain its input/output contract.

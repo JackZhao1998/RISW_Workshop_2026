@@ -1,0 +1,4 @@
+interface:
+  display_name: "Data Checker"
+  short_description: "Validate SAP-required analysis data"
+  default_prompt: "Use $data-checker to validate uploaded analysis datasets against a SAP contract JSON before analysis."
