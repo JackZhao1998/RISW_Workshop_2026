@@ -7,9 +7,14 @@ passes data readiness checks.
 
 ## Tutorial video and build prompts
 
-[![Watch the biomedical pipeline tutorial](tutorial/poster.png)](https://github.com/JackZhao1998/RISW_Workshop_2026/raw/refs/heads/main/tutorial/RISW_Biomedical_Pipeline_Tutorial.mp4)
+https://github.com/user-attachments/assets/ec327c46-993d-4390-8d6d-96567f747dd5
 
-**[Watch or download the tutorial video](https://github.com/JackZhao1998/RISW_Workshop_2026/raw/refs/heads/main/tutorial/RISW_Biomedical_Pipeline_Tutorial.mp4)** — 11 minutes 36 seconds, 1080p, with Microsoft Edge Ava neural English narration, captions, and chapter markers.
+Play the tutorial directly above — 11 minutes 36 seconds, 1080p, with Microsoft
+Edge Ava neural English narration and on-screen captions. Use the speaker
+control to enable narration.
+
+[Download the MP4](https://github.com/JackZhao1998/RISW_Workshop_2026/raw/refs/heads/main/tutorial/RISW_Biomedical_Pipeline_Tutorial.mp4)
+for offline playback with embedded chapter markers.
 
 The video breaks down the skills, helper functions, hooks, shared state, and
 harness. Each chapter includes a construction prompt learners can send to a
