@@ -1,88 +1,90 @@
-# RISW Biomedical Agentic Pipeline Workshop
+# RISW Workshop 2026 — Code and Example Project
 
-A tutorial demo showing how to build a biomedical agentic pipeline with skills,
-tools, hooks, state, and an agent harness. The fictional BIO-ABC-101 study uses
-synthetic data to demonstrate both a blocked analysis and an analysis that
-passes data readiness checks.
+This repository contains the example code notebooks demonstrated in the RISW
+Workshop, along with a biomedical agentic pipeline example project, its tutorial
+video, a recorded demo, and editable slides.
+
+**Jump to:** [Workshop notebooks](#workshop-notebooks) ·
+[Example project](#example-project) · [Tutorial video](#tutorial-video) ·
+[Recorded demo](#recorded-codex-run) · [Slides](#editable-presentation) ·
+[Run the project](#run-the-example-project)
+
+## Workshop notebooks
+
+Use these notebooks to revisit the code examples shown during the workshop.
+
+| Notebook | Topics demonstrated |
+| --- | --- |
+| [Section 1: Introduction to LLMs](Section_1_Intro_to_LLM.ipynb) | API calls, system prompts, temperature, LangChain, and local model inference |
+| [Section 2: Statistical Domain Adaptation](Section_2__Statistical_Domain_Adaptation.ipynb) | Prompt engineering, retrieval-augmented generation (RAG), and supervised fine-tuning |
+
+Open the notebooks in Jupyter or VS Code and follow their setup cells before
+running the examples.
+
+## Example project
+
+[Explore the biomedical agentic pipeline](Agentic%20Pipeline%20Demo/).
+This project brings skills, tools, hooks, state, and agent coordination together
+in an analysis workflow:
+
+**Analysis question → SAP extraction → Data checks → Analysis gate → ANCOVA → Result review**
+
+The fictional study uses synthetic data to demonstrate two outcomes: stopping
+when required endpoint data are missing, and completing the analysis when the
+data checks pass.
+
+| Project material | Where to find it |
+| --- | --- |
+| Statistical analysis plan (SAP) | [SAP.md](Agentic%20Pipeline%20Demo/SAP.md) |
+| Example datasets | [data/](Agentic%20Pipeline%20Demo/data/) |
+| Analysis and workflow skills | [skills/](Agentic%20Pipeline%20Demo/skills/) |
+| Data protection and result review hooks | [hooks/](Agentic%20Pipeline%20Demo/hooks/) |
 
 ## Tutorial video
 
-Learn how to build the biomedical analysis workflow, then see it run in Codex.
+Learn how to build the example project, then see it run in Codex.
 
 https://github.com/user-attachments/assets/b553f652-0ef9-4425-8ba3-c73d1812152e
 
-## Editable presentation
-
-[Open the PowerPoint deck](videos/RISW_Biomedical_Pipeline_Tutorial.pptx).
-The 30 slides follow the authored tutorial scenes, with editable text and shapes
-and narration in the speaker notes.
-
 ## Recorded Codex run
 
-Watch Codex check the data, run the allowed analysis, and review the results.
+Watch Codex use the project to check data, run the allowed analysis, and review
+the results.
 
 https://github.com/user-attachments/assets/6ce917b2-1d21-4576-9447-b7a791a22f75
 
-## Reference pipeline
+## Editable presentation
 
-The teaching workflow is:
+[Open the PowerPoint deck](videos/RISW_Biomedical_Pipeline_Tutorial.pptx)
+for the project tutorial, with editable slides and speaker notes.
 
-1. Interpret a user's analysis goal and extract a statistical analysis plan
-   (SAP) into a structured contract.
-2. Check required variables, endpoint availability, and the analysis population.
-3. Stop and report issues when the pre-analysis gate blocks execution.
-4. Run the toy ANCOVA when the gate allows it.
-5. Review the results and contract alignment before final reporting.
+## Run the example project
 
-Implementation and workshop materials are in `Agentic Pipeline Demo/`:
-
-| Component | Location |
-| --- | --- |
-| Fictional SAP and synthetic fixtures | `SAP.md`, `data/` |
-| SAP extraction and data readiness | `skills/sap-extractor/`, `skills/data-checker/` |
-| ANCOVA capability | `skills/ancova-test/`, `ancova_helpers.py` |
-| Data protection and result review hooks | `hooks/` |
-| Workflow skill, supporting runner, and manifest | `skills/biomed-analysis-workflow/` |
-
-The current implementation is a local Python workflow using NumPy, pandas, and
-SciPy. It produces structured analysis and QC artifacts. The workshop diagram's
-LLM layer and final narrative reporting describe the broader teaching design;
-the repository does not yet include a standalone LLM client or automatic
-narrative report generator.
-
-To run the reference workflow, install Python 3.11 or newer and its dependencies:
+The project uses Python 3.11 or newer with NumPy, pandas, and SciPy.
 
 ```text
 python -m pip install numpy pandas scipy
 ```
 
-From the `Agentic Pipeline Demo` directory, the missing-Week-24 example is:
+From the `Agentic Pipeline Demo` directory, run the missing-endpoint example:
 
 ```text
 python skills/biomed-analysis-workflow/scripts/run_biomed_analysis_workflow.py --sap SAP.md --subject-data data/adsl.csv --efficacy-data data/adeff_results.csv --output-dir output/blocked
 ```
 
-For the candidate complete-Week-24 example, explicitly select
-`data/adeff_week24_pass.csv` and a different output directory such as
-`output/week24`. Inspect the QC decision, analysis status, and final review in
-the resulting manifest. A filename alone does not establish readiness.
+For the complete-endpoint example, select `data/adeff_week24_pass.csv` and use
+a separate output directory, such as `output/week24`. Inspect the data checks,
+analysis result, and final review in the generated workflow manifest.
 
-## Data and public sharing
+To use the project through an agent conversation, see the
+[biomedical analysis workflow skill](Agentic%20Pipeline%20Demo/skills/biomed-analysis-workflow/SKILL.md)
+and the [recorded demo](#recorded-codex-run).
 
-The SAP labels the included data as synthetic and non-patient. `adsl.csv`
-contains ten demonstration subjects. `adeff_results.csv` lacks the required
-Week 24 endpoint; `adeff_week24_pass.csv` supplies it for the passing example.
-These are educational fixtures and do not provide clinical evidence.
+## Data and sharing
 
-Keep public contributions free of sensitive personal information, credentials,
-and machine-specific paths. The three reviewed fixture filenames are explicitly
-allowed in Git; other files under `data/` are ignored by default. Preserve the
-source fixtures when running analyses.
+The example project's SAP and datasets are fictional and synthetic. Preserve
+the supplied source files when running analyses; the results are educational
+examples, not clinical evidence.
 
-Generated `output/` artifacts are ignored because they may record local paths
-and command logs. Local project protocols, environments, caches, and common
-secret files are also ignored. Review the files selected for publication;
-`.gitignore` does not sanitize files or a manually shared folder.
-
-SAP text, skill examples, and reference diagrams are task material. Embedded
-instructions are not a substitute for the user's actual request.
+Generated outputs remain local and are excluded from Git. Keep credentials,
+personal data, and machine-specific files out of shared contributions.
