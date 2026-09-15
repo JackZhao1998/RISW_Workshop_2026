@@ -1,0 +1,583 @@
+1
+00:00:00,350 --> 00:00:01,266
+Welcome.
+
+2
+00:00:01,266 --> 00:00:07,993
+This tutorial breaks a biomedical agentic pipeline into the components you can ask a coding agent to build.
+
+3
+00:00:07,993 --> 00:00:14,243
+We will explain the purpose of each skill, helper, and hook, and show a construction prompt you can adapt.
+
+4
+00:00:14,243 --> 00:00:18,882
+The workshop SAP and datasets are already supplied.
+
+5
+00:00:18,882 --> 00:00:22,194
+The full prompts and function guide accompany the video.
+
+6
+00:00:23,217 --> 00:00:32,857
+Here is the task: compare ABC-201 with placebo on change in HbA1c at Week 24, adjusting for baseline.
+
+7
+00:00:32,857 --> 00:00:36,040
+The supplied analysis plan defines that question.
+
+8
+00:00:36,040 --> 00:00:44,314
+The subject table contains ten synthetic participants, five in each group, with treatment, baseline, and analysis flags.
+
+9
+00:00:44,314 --> 00:00:52,497
+Two alternative efficacy files link by subject ID: one stops at Week 12; the other includes Week 24.
+
+10
+00:00:52,497 --> 00:01:01,247
+The pipeline checks the selected file, then either runs the specified analysis and reviews the result, or stops and explains what is missing.
+
+11
+00:01:02,283 --> 00:01:05,932
+Begin with a user asking the agent an analysis question.
+
+12
+00:01:05,932 --> 00:01:13,896
+The workflow skill tells the agent how to use SAP extraction, readiness checks, analysis, and review.
+
+13
+00:01:13,896 --> 00:01:17,581
+A structured contract carries the analysis requirements.
+
+14
+00:01:17,581 --> 00:01:26,318
+The pre-analysis gate either blocks fitting or allows the specified ANCOVA, and final review checks the result before reporting.
+
+15
+00:01:26,318 --> 00:01:30,661
+The harness supports the conversation, tool calls, and state.
+
+16
+00:01:30,661 --> 00:01:35,339
+The agent uses the evidence to answer the user, including follow-up questions.
+
+17
+00:01:35,339 --> 00:01:39,089
+A separate pre-tool hook checks declared data operations.
+
+18
+00:01:40,150 --> 00:01:42,793
+Start with a goal supplied by the user.
+
+19
+00:01:42,793 --> 00:01:52,716
+This project checks readiness for a Week 24 HbA1c comparison, then estimates the treatment difference only when quality control allows it.
+
+20
+00:01:52,716 --> 00:01:58,863
+The first step records that goal, the existing inputs, and the component build order in a project protocol.
+
+21
+00:01:59,883 --> 00:02:07,707
+The prompt supplies the project goal: build a reusable pipeline from an analysis question and estimand to a reviewed result.
+
+22
+00:02:07,707 --> 00:02:12,991
+Study-specific settings come from the user’s request and statistical analysis plan.
+
+23
+00:02:12,991 --> 00:02:17,720
+Ask the agent to record the scope and build order before implementation.
+
+24
+00:02:18,750 --> 00:02:26,522
+The SAP skill describes a procedure for turning the analysis plan into requirements that other components can use.
+
+25
+00:02:26,522 --> 00:02:30,298
+Each field carries its value and source evidence.
+
+26
+00:02:30,298 --> 00:02:35,143
+The skill also explains how to expose missing or ambiguous information.
+
+27
+00:02:35,143 --> 00:02:38,996
+Extraction ends before any data readiness decision.
+
+28
+00:02:40,017 --> 00:02:45,972
+The skill should explain what information to extract, rather than name a particular study endpoint.
+
+29
+00:02:45,972 --> 00:02:51,706
+The estimand, population, endpoint, and analysis settings become contract fields.
+
+30
+00:02:51,706 --> 00:02:58,150
+Their values come from the document, with source evidence and explicit status for missing information.
+
+31
+00:02:59,183 --> 00:03:04,417
+The extraction helper turns the supplied Markdown excerpt into a JSON contract.
+
+32
+00:03:04,417 --> 00:03:12,355
+It reads sections, labeled values, dash lists, and the model formula, then attaches evidence to each extracted field.
+
+33
+00:03:13,383 --> 00:03:18,527
+Ask for a parser that produces the contract fields needed by downstream tools.
+
+34
+00:03:18,527 --> 00:03:24,016
+The prompt names the concepts to extract, while the supplied plan provides their values.
+
+35
+00:03:24,016 --> 00:03:31,413
+Section and field helpers keep the extraction procedure clear, and the JSON gives later components a common input.
+
+36
+00:03:32,450 --> 00:03:38,173
+The contract, checking table, result, and manifest form the workflow’s state.
+
+37
+00:03:38,173 --> 00:03:41,614
+Small utilities load JSON and record time.
+
+38
+00:03:41,614 --> 00:03:46,614
+The artifact helper describes a file by its resolved path and whether it exists.
+
+39
+00:03:46,614 --> 00:03:50,248
+These records make a completed workflow easier to inspect.
+
+40
+00:03:51,283 --> 00:03:54,700
+This request describes reusable state utilities.
+
+41
+00:03:54,700 --> 00:04:01,723
+They record file locations, timestamps, and structured artifacts for whichever analysis the user selects.
+
+42
+00:04:01,723 --> 00:04:07,084
+The workflow collects those records with its stage decisions so the result can be inspected.
+
+43
+00:04:08,117 --> 00:04:11,404
+The pre-tool hook checks a proposed data operation.
+
+44
+00:04:11,404 --> 00:04:19,136
+It collects paths, identifies targets under the protected data directory, and applies operation and shell-pattern rules.
+
+45
+00:04:19,136 --> 00:04:22,513
+The workflow calls it for declared source-data reads.
+
+46
+00:04:22,513 --> 00:04:26,971
+Its decision matters only where the caller checks and enforces it.
+
+47
+00:04:27,983 --> 00:04:31,799
+The hook’s purpose is independent of the analysis endpoint.
+
+48
+00:04:31,799 --> 00:04:37,353
+The prompt defines its operation event, protected-source policy, and decision output.
+
+49
+00:04:37,353 --> 00:04:44,789
+Protected paths and operation details are inputs, allowing the same check to be used across analysis projects.
+
+50
+00:04:45,817 --> 00:04:52,532
+The data readiness skill tells the agent which inputs to supply and how to interpret the checker’s evidence.
+
+51
+00:04:52,532 --> 00:04:55,625
+It uses the chosen efficacy file throughout.
+
+52
+00:04:55,625 --> 00:05:05,457
+The demo checker requires endpoint coverage for every FAS subject, which is stricter than the SAP’s missing-record exclusion wording.
+
+53
+00:05:06,483 --> 00:05:09,874
+The readiness skill should work from the contract’s requirements.
+
+54
+00:05:09,874 --> 00:05:16,227
+A missing endpoint, required visit, or population variable can prevent the intended analysis.
+
+55
+00:05:16,227 --> 00:05:22,348
+Ask the skill to explain which requirement failed and how that affects the user’s analysis question.
+
+56
+00:05:23,383 --> 00:05:27,534
+The deterministic checker turns contract requirements into a table.
+
+57
+00:05:27,534 --> 00:05:34,944
+It checks columns, subject IDs, treatments, population selection, endpoint records, and subject coverage.
+
+58
+00:05:34,944 --> 00:05:38,153
+Each row records what was expected and observed.
+
+59
+00:05:38,153 --> 00:05:43,230
+The wrapper writes that evidence and a summary decision for the analysis stage.
+
+60
+00:05:44,283 --> 00:05:49,272
+The checker should compare actual data with requirements supplied through the contract.
+
+61
+00:05:49,272 --> 00:05:55,251
+The prompt uses endpoint, population, timing, and coverage as general terms.
+
+62
+00:05:55,251 --> 00:06:02,481
+Its table explains each finding, and its summary tells the analysis component whether the required checks passed.
+
+63
+00:06:03,550 --> 00:06:07,057
+The pre-analysis gate sits inside the analysis helper.
+
+64
+00:06:07,057 --> 00:06:12,057
+It reads the QC summary and continues only for an ALLOW decision.
+
+65
+00:06:12,057 --> 00:06:16,979
+Other decisions produce a blocked result before dataset construction or fitting.
+
+66
+00:06:16,979 --> 00:06:22,856
+In this demo, the gate trusts the supplied summary; it does not rerun the data checks.
+
+67
+00:06:23,883 --> 00:06:28,640
+This gate applies to any analysis tool using the same readiness interface.
+
+68
+00:06:28,640 --> 00:06:34,478
+It reads the QC decision and either permits model work or produces a blocked result.
+
+69
+00:06:34,478 --> 00:06:38,730
+The endpoint and model settings remain in the analysis contract.
+
+70
+00:06:39,783 --> 00:06:43,354
+The numerical helper separates data selection from model fitting.
+
+71
+00:06:43,354 --> 00:06:50,197
+It joins the selected endpoint records to FAS subjects and represents active treatment with an indicator.
+
+72
+00:06:50,197 --> 00:06:54,257
+The model includes an intercept, treatment, and baseline.
+
+73
+00:06:54,257 --> 00:07:00,159
+The result records the treatment difference, uncertainty, sample counts, and diagnostics.
+
+74
+00:07:01,183 --> 00:07:06,069
+ANCOVA remains the defined capability of this helper.
+
+75
+00:07:06,069 --> 00:07:13,852
+The prompt generalizes the endpoint, population, treatment labels, and baseline variable by taking them from the contract.
+
+76
+00:07:13,852 --> 00:07:20,154
+The returned estimate and uncertainty describe the requested contrast using the selected model settings.
+
+77
+00:07:21,183 --> 00:07:26,533
+The ANCOVA skill explains how an agent should use the analysis tool.
+
+78
+00:07:26,533 --> 00:07:31,468
+A thin command-line wrapper loads the chosen inputs and calls the gated helper.
+
+79
+00:07:31,468 --> 00:07:39,626
+It then records the input paths in the result, so the reader can see which contract, QC summary, and datasets were selected.
+
+80
+00:07:40,650 --> 00:07:46,231
+The skill explains when the ANCOVA capability is appropriate and what it needs.
+
+81
+00:07:46,231 --> 00:07:51,734
+Its wrapper accepts the selected datasets and contract instead of assuming a fixed study.
+
+82
+00:07:51,734 --> 00:07:56,914
+It reuses the gated helper and returns structured results that the agent can explain.
+
+83
+00:07:57,950 --> 00:08:00,748
+The final review checks the recorded outcome.
+
+84
+00:08:00,748 --> 00:08:09,176
+It compares the gate and execution status, aligns model fields with the contract, and inspects statistical fields and counts.
+
+85
+00:08:09,176 --> 00:08:14,434
+It also checks declared data-handling flags and can scan supplied report text.
+
+86
+00:08:14,434 --> 00:08:17,475
+Failed checks produce a failed release decision.
+
+87
+00:08:18,517 --> 00:08:22,784
+The review request is about consistency with the intended analysis.
+
+88
+00:08:22,784 --> 00:08:30,193
+It takes the model, variables, and contrast from the contract and applies checks appropriate to the supported method.
+
+89
+00:08:30,193 --> 00:08:36,869
+A completed result, a correctly blocked run, and an inconsistent outcome receive distinct decisions.
+
+90
+00:08:37,917 --> 00:08:41,539
+The existing demo can check a report supplied by the user.
+
+91
+00:08:41,539 --> 00:08:48,846
+It scans the text for a short list of clinical or regulatory claim phrases and adds a finding to the final review.
+
+92
+00:08:48,846 --> 00:08:51,449
+It does not generate a narrative report.
+
+93
+00:08:51,449 --> 00:08:56,526
+The scan uses keywords, so it does not interpret negation or context.
+
+94
+00:08:57,550 --> 00:09:01,946
+The report check uses a documented policy for the analysis context.
+
+95
+00:09:01,946 --> 00:09:08,415
+The prompt asks for phrase matching and a review finding, with the restricted phrases held in one list.
+
+96
+00:09:08,415 --> 00:09:13,003
+Optional text can then be checked as part of the final result review.
+
+97
+00:09:14,050 --> 00:09:18,948
+The workflow skill teaches the agent how to handle analysis tasks through conversation.
+
+98
+00:09:18,948 --> 00:09:24,515
+It connects the user's question with the available skills, tools, and decision rules.
+
+99
+00:09:24,515 --> 00:09:31,371
+The agent may check readiness, carry out an authorized analysis, or explain an existing blocked result.
+
+100
+00:09:31,371 --> 00:09:36,088
+The harness supports the conversation, tool calls, and working state.
+
+101
+00:09:36,088 --> 00:09:44,954
+Deterministic tools perform the checks and calculations, while the agent uses their evidence to decide the next action and answer the user.
+
+102
+00:09:45,983 --> 00:09:51,552
+Ask the coding agent to create instructions that make this workflow usable in conversation.
+
+103
+00:09:51,552 --> 00:09:58,601
+The skill defines when to use each component, how to respond to a gate decision, and what evidence to include in the reply.
+
+104
+00:09:58,601 --> 00:10:02,737
+A Python runner can remain a convenience tool for a complete run.
+
+105
+00:10:02,737 --> 00:10:07,634
+The workflow skill also guides readiness-only tasks and follow-up questions.
+
+106
+00:10:08,683 --> 00:10:13,736
+To recap the build: first, define the analysis goal and scope.
+
+107
+00:10:13,736 --> 00:10:19,471
+Second, build the SAP extraction skill and contract helper.
+
+108
+00:10:19,471 --> 00:10:23,337
+Third, add shared state and source-data protection.
+
+109
+00:10:23,337 --> 00:10:27,899
+Fourth, implement readiness checks and the pre-analysis gate.
+
+110
+00:10:27,899 --> 00:10:33,517
+Fifth, build gated ANCOVA and final-result review tools.
+
+111
+00:10:33,517 --> 00:10:42,203
+Finally, connect these components through a workflow skill, so the agent can carry out requested tasks and explain the evidence in conversation.
+
+112
+00:10:43,050 --> 00:10:48,923
+Start by asking Codex to use the existing biomedical workflow skill to answer the primary efficacy
+
+113
+00:10:48,923 --> 00:10:51,125
+question in the statistical analysis plan.
+
+114
+00:10:51,125 --> 00:10:57,577
+The request names the source files, keeps the two dataset choices separate, and asks for a report
+
+115
+00:10:57,577 --> 00:10:59,475
+supported by the generated artifacts.
+
+116
+00:10:59,475 --> 00:11:03,250
+Codex begins by reading the workflow skill and the plan.
+
+117
+00:11:03,650 --> 00:11:11,549
+The analysis plan defines the target: change from baseline in HbA1c at Week 24, in the full analysis
+
+118
+00:11:11,549 --> 00:11:11,988
+set.
+
+119
+00:11:11,988 --> 00:11:18,111
+The requested model adjusts the treatment comparison for baseline HbA1c. Codex uses these
+
+120
+00:11:18,111 --> 00:11:20,938
+requirements to guide the data checks.
+
+121
+00:11:21,300 --> 00:11:28,062
+The first dataset contains baseline and Week 12 observations, but no Week 24 endpoint records.
+
+122
+00:11:28,062 --> 00:11:31,538
+All ten participants are missing the required endpoint.
+
+123
+00:11:31,538 --> 00:11:35,375
+Three quality checks fail, so the workflow returns BLOCK.
+
+124
+00:11:35,375 --> 00:11:39,412
+No ANCOVA model is fitted for this branch.
+
+125
+00:11:39,412 --> 00:11:44,425
+Codex explains the missing data before moving to the separate complete dataset.
+
+126
+00:11:44,800 --> 00:11:49,038
+For the complete dataset, all sixteen quality checks pass.
+
+127
+00:11:49,038 --> 00:11:55,892
+The gate returns ALLOW, and the existing analysis tool fits the specified ANCOVA using all ten
+
+128
+00:11:55,892 --> 00:11:58,462
+participants, five in each treatment arm.
+
+129
+00:11:58,462 --> 00:12:03,975
+The conversation shows Codex invoking the workflow command and inspecting its outputs.
+
+130
+00:12:04,350 --> 00:12:10,965
+The command output records the stage decisions: statistical analysis plan extraction passed, data
+
+131
+00:12:10,965 --> 00:12:16,562
+checks allowed analysis, ANCOVA completed, and the result passed release review.
+
+132
+00:12:16,562 --> 00:12:22,638
+These decisions are also saved in the workflow manifest alongside the commands and artifact paths.
+
+133
+00:12:23,050 --> 00:12:26,488
+Codex writes and opens the analysis report.
+
+134
+00:12:26,488 --> 00:12:32,668
+The comparison table makes the two outcomes explicit: the incomplete branch is blocked with zero
+
+135
+00:12:32,668 --> 00:12:37,612
+qualifying Week 24 records, while the complete branch includes all ten participants.
+
+136
+00:12:37,612 --> 00:12:42,438
+The report links back to the source plan, quality checks, and analysis artifacts.
+
+137
+00:12:42,800 --> 00:12:49,375
+The adjusted ABC-201 minus placebo difference is minus zero point six one four.
+
+138
+00:12:49,375 --> 00:12:55,455
+The ninety-five percent confidence interval runs from minus zero point six nine seven to minus zero
+
+139
+00:12:55,455 --> 00:12:56,975
+point five three one.
+
+140
+00:12:56,975 --> 00:13:03,741
+The two-sided p-value is approximately four point nine seven times ten to the minus seven, in this
+
+141
+00:13:03,741 --> 00:13:04,538
+synthetic dataset.
+
+142
+00:13:04,900 --> 00:13:09,112
+The final review hook checks the written report for both branches.
+
+143
+00:13:09,112 --> 00:13:14,112
+The incomplete branch remains BLOCK, and the completed branch receives PASS.
+
+144
+00:13:14,112 --> 00:13:16,262
+The source files are unchanged.
+
+145
+00:13:16,262 --> 00:13:21,565
+The finished workflow connects the analysis request, source requirements, data checks, gated
+
+146
+00:13:21,565 --> 00:13:25,100
+computation, and a report that cites its evidence.

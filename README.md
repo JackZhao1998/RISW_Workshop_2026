@@ -7,12 +7,14 @@ passes data readiness checks.
 
 ## Tutorial video
 
-[Open the revised tutorial](RISW_Biomedical_Pipeline_Tutorial.mp4) —
-10 minutes 43 seconds, 1080p, with Microsoft Edge Ava neural English narration
+[Download and play the complete tutorial](https://github.com/JackZhao1998/RISW_Workshop_2026/raw/refs/heads/main/RISW_Biomedical_Pipeline_Tutorial.mp4) —
+13 minutes 26 seconds, 1080p, with Microsoft Edge Ava neural English narration
 and on-screen captions.
 
-[Download the MP4](https://github.com/JackZhao1998/RISW_Workshop_2026/raw/refs/heads/main/RISW_Biomedical_Pipeline_Tutorial.mp4)
-for offline playback with embedded chapter markers.
+The MP4 includes 25 chapter markers and the recorded Codex session at the end.
+GitHub's file viewer does not preview this large video. Use the link above to
+download it, then open it in your browser or video player.
+[Download the captions](https://github.com/JackZhao1998/RISW_Workshop_2026/raw/refs/heads/main/RISW_Biomedical_Pipeline_Tutorial.srt).
 
 The video introduces the supplied data and Week 24 HbA1c comparison, then
 breaks down the skills, helper functions, hooks, shared state, and harness.
@@ -21,9 +23,11 @@ build a reusable component. The prompts take the estimand, endpoint,
 population, and treatment comparison from the user's question and SAP;
 the supplied study provides the worked example. The harness chapter explains
 how a workflow skill guides the agent through conversational analysis tasks,
-tool calls, gate decisions, and follow-up answers. The ending recaps the build
-in six steps. It is an authored project
-walkthrough, not a screen recording of a live build.
+tool calls, gate decisions, and follow-up answers. A six-step build recap closes
+the authored tutorial. At 10:43, the video continues with the recorded Codex
+session, showing the completed workflow in use through the final analysis
+results and report review. Idle pauses are trimmed; narration is added after
+recording.
 
 After cloning or downloading the repository, open
 [RISW_Biomedical_Pipeline_Tutorial.mp4](RISW_Biomedical_Pipeline_Tutorial.mp4)
@@ -33,13 +37,13 @@ is kept locally and excluded from Git.
 ## Editable presentation
 
 [Download the PowerPoint deck](RISW_Biomedical_Pipeline_Tutorial.pptx).
-The 30 slides follow the tutorial scenes, with editable text and shapes and
-narration in the speaker notes.
+The 30 slides follow the authored tutorial scenes, with editable text and shapes
+and narration in the speaker notes.
 
 ## Recorded Codex run
 
-[Watch the recorded Codex session](RISW_Biomedical_Pipeline_Codex_Run.mp4) —
-3 minutes 34 seconds, 1080p, with narration, captions, and eight chapter markers.
+[Download and play the recorded Codex session](https://github.com/JackZhao1998/RISW_Workshop_2026/raw/refs/heads/main/RISW_Biomedical_Pipeline_Codex_Run.mp4) —
+2 minutes 43 seconds, 1080p, with narration, captions, and eight chapter markers.
 The video shows an actual Codex desktop session using the existing workflow;
 idle pauses are trimmed and narration is added after recording.
 
@@ -48,8 +52,7 @@ branch returns `BLOCK` without fitting ANCOVA. The complete branch passes all
 16 QC checks, fits ANCOVA for 10 participants, and passes final report review.
 The SAP and source CSVs remain unchanged.
 
-[Download the MP4](https://github.com/JackZhao1998/RISW_Workshop_2026/raw/refs/heads/main/RISW_Biomedical_Pipeline_Codex_Run.mp4)
-or [get the captions](RISW_Biomedical_Pipeline_Codex_Run.srt).
+[Download the captions](https://github.com/JackZhao1998/RISW_Workshop_2026/raw/refs/heads/main/RISW_Biomedical_Pipeline_Codex_Run.srt).
 
 ## Reference pipeline
 
