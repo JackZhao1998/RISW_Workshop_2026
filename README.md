@@ -7,31 +7,9 @@ passes data readiness checks.
 
 ## Tutorial video
 
-Play the complete tutorial below:
+Learn how to build the biomedical analysis workflow, then see it run in Codex.
 
 https://github.com/user-attachments/assets/b553f652-0ef9-4425-8ba3-c73d1812152e
-
-13 minutes 26 seconds, 1080p, with Microsoft Edge Ava neural English narration
-and on-screen captions.
-
-The MP4 includes 25 chapter markers and the recorded Codex session at the end.
-[Caption file](videos/RISW_Biomedical_Pipeline_Tutorial.srt).
-
-The video introduces the supplied data and Week 24 HbA1c comparison, then
-breaks down the skills, helper functions, hooks, shared state, and harness.
-Each chapter includes a brief prompt learners can send to a coding agent to
-build a reusable component. The prompts take the estimand, endpoint,
-population, and treatment comparison from the user's question and SAP;
-the supplied study provides the worked example. The harness chapter explains
-how a workflow skill guides the agent through conversational analysis tasks,
-tool calls, gate decisions, and follow-up answers. A six-step build recap closes
-the authored tutorial. At 10:43, the video continues with the recorded Codex
-session, showing the completed workflow in use through the final analysis
-results and report review. Idle pauses are trimmed; narration is added after
-recording.
-
-The source MP4s, caption files, and editable deck are in `videos/`.
-The `tutorial/` production folder is kept locally and excluded from Git.
 
 ## Editable presentation
 
@@ -41,20 +19,9 @@ and narration in the speaker notes.
 
 ## Recorded Codex run
 
-Play the standalone Codex session below:
+Watch Codex check the data, run the allowed analysis, and review the results.
 
 https://github.com/user-attachments/assets/6ce917b2-1d21-4576-9447-b7a791a22f75
-
-2 minutes 43 seconds, 1080p, with narration, captions, and eight chapter markers.
-The video shows an actual Codex desktop session using the existing workflow;
-idle pauses are trimmed and narration is added after recording.
-
-Codex checks both supplied efficacy datasets separately. The missing-Week-24
-branch returns `BLOCK` without fitting ANCOVA. The complete branch passes all
-16 QC checks, fits ANCOVA for 10 participants, and passes final report review.
-The SAP and source CSVs remain unchanged.
-
-[Caption file](videos/RISW_Biomedical_Pipeline_Codex_Run.srt).
 
 ## Reference pipeline
 
