@@ -1,1 +1,0 @@
-Please implement utc_now() for the biomedical workshop pipeline. Return a timezone-aware UTC timestamp in a consistent ISO 8601 format. Keep it free of local account or machine metadata. Keep this step focused on the named function and explain its input/output contract.

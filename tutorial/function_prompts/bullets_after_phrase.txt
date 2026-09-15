@@ -1,1 +1,0 @@
-Please implement bullets_after_phrase() for the biomedical workshop pipeline. Find the designated introductory phrase and collect only its following list, stopping at the next section or unrelated text. Preserve order and detect absence explicitly. Keep this step focused on the named function and explain its input/output contract.

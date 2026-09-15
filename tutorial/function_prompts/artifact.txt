@@ -1,1 +1,0 @@
-Please implement artifact() for the biomedical workshop pipeline. Return its relative path, existence, and SHA-256 fingerprint. Report missing artifacts explicitly and never describe a missing file as verified. Keep this step focused on the named function and explain its input/output contract.

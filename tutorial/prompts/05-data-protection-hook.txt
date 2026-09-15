@@ -1,5 +1,0 @@
-Build hooks/pre_tool_data_security_hook.py to review a proposed file operation before our workflow dispatches it. Protect data/ and SAP.md from modification. Allow recognized read-only operations, and block writes, deletion, moves, renaming, patching, or unrecognized operations against protected sources.
-
-Accept a structured event containing the tool name, operation, and input/output paths. Resolve relative paths before checking containment, including paths containing '..'. Return JSON with ALLOW or BLOCK and an explanation. Provide a CLI so the hook can be inspected separately.
-
-Test allowed reads, blocked mutations, unknown operations, and path traversal using temporary files. Do not actually modify the supplied inputs. Document where the harness must call this hook and that a Python hook is not an operating-system sandbox. Prefer structured tool calls; shell-text pattern matching alone should not be treated as complete protection.

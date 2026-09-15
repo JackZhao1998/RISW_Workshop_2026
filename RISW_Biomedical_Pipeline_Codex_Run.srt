@@ -1,0 +1,139 @@
+1
+00:00:00,450 --> 00:00:06,323
+Start by asking Codex to use the existing biomedical workflow skill to answer the primary efficacy
+
+2
+00:00:06,323 --> 00:00:08,525
+question in the statistical analysis plan.
+
+3
+00:00:08,525 --> 00:00:14,977
+The request names the source files, keeps the two dataset choices separate, and asks for a report
+
+4
+00:00:14,977 --> 00:00:16,875
+supported by the generated artifacts.
+
+5
+00:00:16,875 --> 00:00:20,650
+Codex begins by reading the workflow skill and the plan.
+
+6
+00:00:35,450 --> 00:00:43,349
+The analysis plan defines the target: change from baseline in HbA1c at Week 24, in the full analysis
+
+7
+00:00:43,349 --> 00:00:43,787
+set.
+
+8
+00:00:43,788 --> 00:00:49,911
+The requested model adjusts the treatment comparison for baseline HbA1c. Codex uses these
+
+9
+00:00:49,911 --> 00:00:52,738
+requirements to guide the data checks.
+
+10
+00:00:55,450 --> 00:01:02,212
+The first dataset contains baseline and Week 12 observations, but no Week 24 endpoint records.
+
+11
+00:01:02,212 --> 00:01:05,688
+All ten participants are missing the required endpoint.
+
+12
+00:01:05,688 --> 00:01:09,525
+Three quality checks fail, so the workflow returns BLOCK.
+
+13
+00:01:09,525 --> 00:01:13,562
+No ANCOVA model is fitted for this branch.
+
+14
+00:01:13,562 --> 00:01:18,575
+Codex explains the missing data before moving to the separate complete dataset.
+
+15
+00:01:19,450 --> 00:01:23,688
+For the complete dataset, all sixteen quality checks pass.
+
+16
+00:01:23,688 --> 00:01:30,542
+The gate returns ALLOW, and the existing analysis tool fits the specified ANCOVA using all ten
+
+17
+00:01:30,542 --> 00:01:33,112
+participants, five in each treatment arm.
+
+18
+00:01:33,112 --> 00:01:38,625
+The conversation shows Codex invoking the workflow command and inspecting its outputs.
+
+19
+00:01:54,450 --> 00:02:01,065
+The command output records the stage decisions: statistical analysis plan extraction passed, data
+
+20
+00:02:01,065 --> 00:02:06,662
+checks allowed analysis, ANCOVA completed, and the result passed release review.
+
+21
+00:02:06,662 --> 00:02:12,738
+These decisions are also saved in the workflow manifest alongside the commands and artifact paths.
+
+22
+00:02:14,450 --> 00:02:17,888
+Codex writes and opens the analysis report.
+
+23
+00:02:17,888 --> 00:02:24,068
+The comparison table makes the two outcomes explicit: the incomplete branch is blocked with zero
+
+24
+00:02:24,068 --> 00:02:29,012
+qualifying Week 24 records, while the complete branch includes all ten participants.
+
+25
+00:02:29,012 --> 00:02:33,838
+The report links back to the source plan, quality checks, and analysis artifacts.
+
+26
+00:02:45,450 --> 00:02:52,025
+The adjusted ABC-201 minus placebo difference is minus zero point six one four.
+
+27
+00:02:52,025 --> 00:02:58,105
+The ninety-five percent confidence interval runs from minus zero point six nine seven to minus zero
+
+28
+00:02:58,105 --> 00:02:59,625
+point five three one.
+
+29
+00:02:59,625 --> 00:03:06,391
+The two-sided p-value is approximately four point nine seven times ten to the minus seven, in this
+
+30
+00:03:06,391 --> 00:03:07,188
+synthetic dataset.
+
+31
+00:03:10,450 --> 00:03:14,662
+The final review hook checks the written report for both branches.
+
+32
+00:03:14,662 --> 00:03:19,662
+The incomplete branch remains BLOCK, and the completed branch receives PASS.
+
+33
+00:03:19,662 --> 00:03:21,812
+The source files are unchanged.
+
+34
+00:03:21,812 --> 00:03:27,115
+The finished workflow connects the analysis request, source requirements, data checks, gated
+
+35
+00:03:27,115 --> 00:03:30,650
+computation, and a report that cites its evidence.

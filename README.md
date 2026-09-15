@@ -5,36 +5,51 @@ tools, hooks, state, and an agent harness. The fictional BIO-ABC-101 study uses
 synthetic data to demonstrate both a blocked analysis and an analysis that
 passes data readiness checks.
 
-## Tutorial video and build prompts
+## Tutorial video
 
-https://github.com/user-attachments/assets/ec327c46-993d-4390-8d6d-96567f747dd5
+[Open the revised tutorial](RISW_Biomedical_Pipeline_Tutorial.mp4) —
+10 minutes 43 seconds, 1080p, with Microsoft Edge Ava neural English narration
+and on-screen captions.
 
-Play the tutorial directly above — 11 minutes 36 seconds, 1080p, with Microsoft
-Edge Ava neural English narration and on-screen captions. Use the speaker
-control to enable narration.
-
-[Download the MP4](https://github.com/JackZhao1998/RISW_Workshop_2026/raw/refs/heads/main/tutorial/RISW_Biomedical_Pipeline_Tutorial.mp4)
+[Download the MP4](https://github.com/JackZhao1998/RISW_Workshop_2026/raw/refs/heads/main/RISW_Biomedical_Pipeline_Tutorial.mp4)
 for offline playback with embedded chapter markers.
 
-The video breaks down the skills, helper functions, hooks, shared state, and
-harness. Each chapter includes a construction prompt learners can send to a
-coding agent to build that component. It is an authored project walkthrough,
-not a screen recording of a live build.
+The video introduces the supplied data and Week 24 HbA1c comparison, then
+breaks down the skills, helper functions, hooks, shared state, and harness.
+Each chapter includes a brief prompt learners can send to a coding agent to
+build a reusable component. The prompts take the estimand, endpoint,
+population, and treatment comparison from the user's question and SAP;
+the supplied study provides the worked example. The harness chapter explains
+how a workflow skill guides the agent through conversational analysis tasks,
+tool calls, gate decisions, and follow-up answers. The ending recaps the build
+in six steps. It is an authored project
+walkthrough, not a screen recording of a live build.
 
-| Resource | Link |
-| --- | --- |
-| Full step-by-step construction prompts | [14 chapter prompts](tutorial/build_prompts.md) |
-| Individual helper-function requests | [Function prompts](tutorial/function_build_prompts.md) |
-| Architecture and component responsibilities | [Project breakdown](tutorial/project_breakdown.md) |
-| Video chapter timestamps | [Chapters](tutorial/video_chapters.md) |
-| Captions | [SRT](tutorial/RISW_Biomedical_Pipeline_Tutorial.srt) · [WebVTT](tutorial/RISW_Biomedical_Pipeline_Tutorial.vtt) |
-| Narration audio | [Listen or download](https://github.com/JackZhao1998/RISW_Workshop_2026/raw/refs/heads/main/tutorial/RISW_Biomedical_Pipeline_Narration.m4a) |
-| Complete tutorial package and production instructions | [Tutorial README](tutorial/README.md) |
+After cloning or downloading the repository, open
+[RISW_Biomedical_Pipeline_Tutorial.mp4](RISW_Biomedical_Pipeline_Tutorial.mp4)
+in the repository root for local playback. The `tutorial/` production folder
+is kept locally and excluded from Git.
 
-After cloning or downloading the repository, open `tutorial/watch.html` for
-local video playback or `tutorial/walkthrough.html` for the interactive prompt
-guide. The component breakdown distinguishes the existing reference
-implementation from additions requested by the build prompts.
+## Editable presentation
+
+[Download the PowerPoint deck](RISW_Biomedical_Pipeline_Tutorial.pptx).
+The 30 slides follow the tutorial scenes, with editable text and shapes and
+narration in the speaker notes.
+
+## Recorded Codex run
+
+[Watch the recorded Codex session](RISW_Biomedical_Pipeline_Codex_Run.mp4) —
+3 minutes 34 seconds, 1080p, with narration, captions, and eight chapter markers.
+The video shows an actual Codex desktop session using the existing workflow;
+idle pauses are trimmed and narration is added after recording.
+
+Codex checks both supplied efficacy datasets separately. The missing-Week-24
+branch returns `BLOCK` without fitting ANCOVA. The complete branch passes all
+16 QC checks, fits ANCOVA for 10 participants, and passes final report review.
+The SAP and source CSVs remain unchanged.
+
+[Download the MP4](https://github.com/JackZhao1998/RISW_Workshop_2026/raw/refs/heads/main/RISW_Biomedical_Pipeline_Codex_Run.mp4)
+or [get the captions](RISW_Biomedical_Pipeline_Codex_Run.srt).
 
 ## Reference pipeline
 
@@ -45,7 +60,7 @@ The teaching workflow is:
 2. Check required variables, endpoint availability, and the analysis population.
 3. Stop and report issues when the pre-analysis gate blocks execution.
 4. Run the toy ANCOVA when the gate allows it.
-5. Review the results and provenance before final reporting.
+5. Review the results and contract alignment before final reporting.
 
 Implementation and workshop materials are in `Agentic Pipeline Demo/`:
 
@@ -55,7 +70,7 @@ Implementation and workshop materials are in `Agentic Pipeline Demo/`:
 | SAP extraction and data readiness | `skills/sap-extractor/`, `skills/data-checker/` |
 | ANCOVA capability | `skills/ancova-test/`, `ancova_helpers.py` |
 | Data protection and result review hooks | `hooks/` |
-| Workflow orchestration and manifest | `skills/biomed-analysis-workflow/` |
+| Workflow skill, supporting runner, and manifest | `skills/biomed-analysis-workflow/` |
 
 The current implementation is a local Python workflow using NumPy, pandas, and
 SciPy. It produces structured analysis and QC artifacts. The workshop diagram's

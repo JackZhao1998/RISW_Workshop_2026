@@ -1,1 +1,0 @@
-Please implement _row() for the biomedical workshop pipeline. Return a dictionary with task, term, dataset, expected, observed, pass_flag, status, severity, details, and source_section. Keep status and pass_flag consistent and preserve meaningful observed values. Keep this step focused on the named function and explain its input/output contract.

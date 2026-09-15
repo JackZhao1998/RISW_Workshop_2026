@@ -1,1 +1,0 @@
-Please implement resolve_embedded_contract() for the biomedical workshop pipeline. Prefer an explicit contract path when supplied, otherwise use a validated recorded path. Check existence, schema, and the expected fingerprint before trusting it. Report mismatched explicit and recorded identities. Keep this step focused on the named function and explain its input/output contract.

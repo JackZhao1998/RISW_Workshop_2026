@@ -1,1 +1,0 @@
-Please implement _load_contract() for the biomedical workshop pipeline. Accept a dictionary or JSON path, validate the expected top-level contract structure, and report malformed or missing content clearly. Do not treat arbitrary document strings as executable expressions. Keep this step focused on the named function and explain its input/output contract.

@@ -5,7 +5,6 @@ from __future__ import annotations
 
 import argparse
 import datetime as dt
-import hashlib
 import json
 import subprocess
 import sys
@@ -15,14 +14,6 @@ from typing import Any
 
 def utc_now() -> str:
     return dt.datetime.now(dt.UTC).replace(microsecond=0).isoformat()
-
-
-def sha256_file(path: Path) -> str:
-    digest = hashlib.sha256()
-    with path.open("rb") as handle:
-        for chunk in iter(lambda: handle.read(65536), b""):
-            digest.update(chunk)
-    return digest.hexdigest()
 
 
 def find_demo_root(start: Path) -> Path:
@@ -68,7 +59,6 @@ def artifact(path: Path) -> dict[str, Any]:
     return {
         "path": str(path.resolve()),
         "exists": path.exists(),
-        "sha256": sha256_file(path) if path.exists() and path.is_file() else None,
     }
 
 

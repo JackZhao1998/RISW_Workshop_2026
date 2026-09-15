@@ -1,1 +1,0 @@
-Please implement contract_value() for the biomedical workshop pipeline. Retrieve the named value from a validated contract and report missing required values explicitly. Do not supply an unstated model, contrast, or population default. Keep this step focused on the named function and explain its input/output contract.

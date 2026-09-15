@@ -25,7 +25,6 @@ READ_ONLY_OPERATIONS = {
     "list",
     "inspect",
     "stat",
-    "hash",
     "summarize",
     "load",
     "validate",

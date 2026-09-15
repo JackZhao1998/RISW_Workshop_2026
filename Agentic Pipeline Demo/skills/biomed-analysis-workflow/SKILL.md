@@ -16,7 +16,7 @@ Coordinate the complete demo workflow from SAP and source datasets to a final re
 3. Run data-checker to validate required variables, endpoint availability, and analysis population.
 4. Run ANCOVA-test only if data-checker returns `ALLOW`.
 5. Run final result review hook to decide whether the result can be released.
-6. Write a manifest that records paths, decisions, and artifact hashes.
+6. Write a manifest that records input paths, stage decisions, and output artifacts.
 
 ## Component Responsibilities
 
@@ -26,7 +26,7 @@ Coordinate the complete demo workflow from SAP and source datasets to a final re
 | `pre_tool_data_security_hook.py` | Prevent mutation of the protected `data/` folder |
 | `data-checker` | Validate SAP-required data terms and emit `ALLOW` or `BLOCK` |
 | `ancova-test` | Run ANCOVA only when QC returns `ALLOW` |
-| `final_result_review_hook.py` | Verify contract alignment, provenance, result sanity, and release decision |
+| `final_result_review_hook.py` | Verify contract alignment, result sanity, and release decision |
 
 ## Function/CLI Argument Specifications
 
@@ -84,6 +84,6 @@ workflow_manifest.json
 - Never edit files under the source `data/` folder.
 - Never run ANCOVA when data-checker returns `BLOCK`.
 - Never report ANCOVA estimates for a blocked branch.
-- Always include provenance paths and hashes.
+- Always include the selected input paths and generated artifact paths.
 - Treat output as a synthetic workshop demonstration, not clinical evidence.
 

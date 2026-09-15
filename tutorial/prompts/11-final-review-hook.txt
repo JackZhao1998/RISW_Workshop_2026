@@ -1,5 +1,0 @@
-Build hooks/final_result_review_hook.py to review the outcome before final reporting. Use separate functions for gate consistency, SAP-contract alignment, provenance, source-data handling, statistical result checks, and draft-report review.
-
-Check that blocked analysis did not produce estimates, that a completed result used the authorized model and contrast, and that the current input hashes and included-subject counts reconcile with the QC evidence. Validate finite numerical fields, positive residual degrees of freedom, sensible confidence intervals, and consistency among the estimate, SE, t statistic, and p value.
-
-Return PASS for a consistent completed demo result, BLOCK for a correctly blocked analysis that may only produce an issue report, and FAIL for inconsistent artifacts. Test a valid result, a correctly blocked result, a changed hash, a reversed contrast, and a malformed numerical field. Flag unsupported clinical claims for review, but do not treat a keyword scan as proof of scientific validity or misread a disclaimer as a positive claim.

@@ -30,7 +30,7 @@ def main() -> None:
     script_path = Path(__file__).resolve()
     demo_root = find_demo_root(script_path)
     sys.path.insert(0, str(demo_root))
-    from ancova_helpers import run_ancova_if_qc_passes, sha256_file
+    from ancova_helpers import run_ancova_if_qc_passes
 
     contract_path = args.contract.resolve()
     qc_summary_path = args.qc_summary.resolve()
@@ -49,13 +49,9 @@ def main() -> None:
         efficacy_dataset_name=efficacy_path.name,
     )
     result["input_datasets"]["subject_data_path"] = str(subject_path)
-    result["input_datasets"]["subject_data_sha256"] = sha256_file(subject_path)
     result["input_datasets"]["efficacy_data_path"] = str(efficacy_path)
-    result["input_datasets"]["efficacy_data_sha256"] = sha256_file(efficacy_path)
     result["qc_gate"]["qc_summary_path"] = str(qc_summary_path)
-    result["qc_gate"]["qc_summary_sha256"] = sha256_file(qc_summary_path)
     result["analysis_contract"]["contract_path"] = str(contract_path)
-    result["analysis_contract"]["contract_sha256"] = sha256_file(contract_path)
 
     output_path.parent.mkdir(parents=True, exist_ok=True)
     output_path.write_text(json.dumps(result, indent=2), encoding="utf-8")

@@ -5,7 +5,6 @@ from __future__ import annotations
 
 import argparse
 import datetime as dt
-import hashlib
 import json
 import sys
 from pathlib import Path
@@ -16,14 +15,6 @@ import pandas as pd
 
 def utc_now() -> str:
     return dt.datetime.now(dt.UTC).replace(microsecond=0).isoformat()
-
-
-def sha256_file(path: Path) -> str:
-    digest = hashlib.sha256()
-    with path.open("rb") as handle:
-        for chunk in iter(lambda: handle.read(65536), b""):
-            digest.update(chunk)
-    return digest.hexdigest()
 
 
 def find_demo_root(start: Path) -> Path:
@@ -54,15 +45,12 @@ def make_summary(
         "inputs": {
             "contract": {
                 "path": str(contract_path),
-                "sha256": sha256_file(contract_path),
             },
             "subject_data": {
                 "path": str(subject_path),
-                "sha256": sha256_file(subject_path),
             },
             "efficacy_data": {
                 "path": str(efficacy_path),
-                "sha256": sha256_file(efficacy_path),
             },
         },
         "data_handling": {

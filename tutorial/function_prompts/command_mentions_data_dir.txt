@@ -1,1 +1,0 @@
-Please implement command_mentions_data_dir() for the biomedical workshop pipeline. Recognize supported path spellings for the protected directory and return a diagnostic match. Document that substring matching cannot prove a command's safety or resolve every shell expansion. Keep this step focused on the named function and explain its input/output contract.

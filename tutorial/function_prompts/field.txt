@@ -1,1 +1,0 @@
-Please implement field() for the biomedical workshop pipeline. Return value, source_section, evidence, and FOUND/NOT_FOUND/AMBIGUOUS status. Preserve valid falsy values and explicitly represent missing or conflicting information without inventing evidence. Keep this step focused on the named function and explain its input/output contract.

@@ -1,1 +1,0 @@
-Please implement load_json() for the biomedical workshop pipeline. Accept the documented path/object input forms, return a JSON object, and reject malformed or unsupported content clearly. Keep loading separate from artifact-specific schema validation. Keep this step focused on the named function and explain its input/output contract.

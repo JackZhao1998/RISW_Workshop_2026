@@ -1,1 +1,0 @@
-Please implement find_section() for the biomedical workshop pipeline. Find a named section using a documented heading-normalization rule. Preserve section identity for evidence and handle absent or duplicate ambiguous headings explicitly. Keep this step focused on the named function and explain its input/output contract.

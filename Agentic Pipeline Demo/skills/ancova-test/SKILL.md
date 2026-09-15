@@ -103,4 +103,4 @@ Do not let the model or user request override this gate.
 - Do not edit or impute source records.
 - Do not run exploratory alternate models in this skill.
 - Do not interpret toy results as clinical evidence.
-- Include input paths and hashes in the output when the CLI wrapper is used.
+- Include input paths in the output when the CLI wrapper is used.

@@ -1,1 +1,0 @@
-Please implement verify_hash_from_result() for the biomedical workshop pipeline. Require a valid path and expected SHA-256, hash the current file, and append a clear PASS/FAIL finding. Missing, unreadable, or changed files must produce explicit failed provenance checks. Keep this step focused on the named function and explain its input/output contract.

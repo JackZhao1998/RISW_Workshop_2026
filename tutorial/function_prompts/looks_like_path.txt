@@ -1,1 +1,0 @@
-Please implement looks_like_path() for the biomedical workshop pipeline. Implement this only as a candidate-detection heuristic for the documented event format. Avoid treating a negative heuristic result as authorization to execute an otherwise unclassified operation. Keep this step focused on the named function and explain its input/output contract.

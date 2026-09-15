@@ -1,5 +1,0 @@
-Implement check_sap_contract_against_data() in data_qc_helpers.py and a CLI wrapper under skills/data-checker/scripts/. The function should accept the contract and subject/efficacy DataFrames without changing them.
-
-Return one row per check with the term, expected value, observed value, status, explanation, and SAP source section. Check required columns, unique subject IDs, treatment values, the FAS filter, HBA1C Week 24 analysis records, missing or duplicate endpoint records, join integrity, and finite CHG and BASE values. Also check CHG against AVAL minus BASE and baseline consistency using a documented numeric tolerance. Support a small explicit filter grammar; do not evaluate document strings as code.
-
-Write the table to CSV/JSON and a summary with failed terms, counts, and contract/input fingerprints. ALLOW requires all required checks to pass; missing or incomplete checks must BLOCK. Include checks demonstrating the supplied missing-Week-24 and complete-Week-24 cases. Do not fit ANCOVA.

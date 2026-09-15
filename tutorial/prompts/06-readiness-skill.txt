@@ -1,5 +1,0 @@
-Create skills/data-checker/SKILL.md for assessing data readiness against the SAP contract. Explain when to use it, which contract and CSV inputs it needs, which QC helper it should call, and how to explain the helper's findings.
-
-The procedure should check required fields, population membership, permitted treatments, endpoint selection, record counts, and usable model inputs. It must use the explicitly selected efficacy file. If the Week 24 endpoint is missing, it should report the problem rather than switch files, impute data, or substitute Week 12.
-
-For this workshop, require complete usable endpoint coverage of the expected Full Analysis Set before allowing analysis. Label that as our conservative workshop gate policy, since the SAP also describes counting missing-record exclusions. The skill should collect evidence and explain ALLOW/BLOCK; it must not fit the model or modify source data. Only create the skill in this step.

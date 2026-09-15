@@ -1,1 +1,0 @@
-Please implement all_bullets() for the biomedical workshop pipeline. Extract list entries in source order without inventing text. Document support for bullet and numbered lists, and preserve enough source location information for later evidence checks. Keep this step focused on the named function and explain its input/output contract.

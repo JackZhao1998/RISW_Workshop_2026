@@ -5,6 +5,7 @@ project_protocol.md
 .idea/
 .vscode/
 VideoWorkspace/
+/tutorial/
 
 # Credentials and private local material
 .env

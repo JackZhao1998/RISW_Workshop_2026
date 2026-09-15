@@ -1,1 +1,0 @@
-Please implement check_source_data_handling() for the biomedical workshop pipeline. Compare source fingerprints before and after the workflow and report any mismatch. Keep declared mutation flags as supplementary metadata rather than accepting them as proof that files were untouched. Keep this step focused on the named function and explain its input/output contract.

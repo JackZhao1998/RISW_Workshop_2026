@@ -1,1 +1,0 @@
-Please implement _clean_values() for the biomedical workshop pipeline. Return a cleaned string Series with whitespace removed and an explicit missing-value policy. Preserve the original Series; this function must not edit the source DataFrame. Keep this step focused on the named function and explain its input/output contract.

@@ -1,5 +1,0 @@
-Now implement the ANCOVA helpers in ancova_helpers.py. Build the analysis dataset by selecting FASFL = Y subjects and HBA1C, Week 24, ANL01FL = Y records, then join by USUBJID with one-to-one validation. Use the contract to determine the variables and contrast. Reject unsupported model specifications rather than silently fitting a different model.
-
-Fit CHG = TRT01P + BASE with Placebo as the reference and report ABC-201 minus Placebo. For this educational implementation, use ordinary least squares with conventional residual-variance standard errors, a two-sided t test, and a 95% confidence interval. Record these as workshop analysis settings because the SAP does not state all of them.
-
-Use numerically stable linear algebra and reject nonfinite values, rank deficiency, missing treatment arms, or insufficient residual degrees of freedom. Report N, treatment counts, estimate, SE, CI, p value, and diagnostics. Keep full precision in JSON, preserve the existing gate, and verify the calculation against an independent implementation.

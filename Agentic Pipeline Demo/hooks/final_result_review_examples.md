@@ -33,24 +33,7 @@ Checks:
 study_id, model, formula, outcome, treatment, baseline covariate, contrast
 ```
 
-### 3. Provenance Hash Hook
-
-Question:
-
-```text
-Can we still identify the exact SAP, QC summary, and source datasets used?
-```
-
-Checks:
-
-```text
-contract hash matches
-QC summary hash matches
-ADSL hash matches
-ADEFF hash matches
-```
-
-### 4. Statistical Result Sanity Hook
+### 3. Statistical Result Sanity Hook
 
 Question:
 
@@ -69,7 +52,7 @@ residual df > 0
 N equals sum of treatment counts
 ```
 
-### 5. Final Response Safety Hook
+### 4. Final Response Safety Hook
 
 Question:
 
@@ -91,6 +74,6 @@ Examples to block:
 ```text
 PASS  = completed result is internally consistent and reportable for the demo
 BLOCK = analysis was correctly blocked; report the QC failure, not ANCOVA results
-FAIL  = do not release; fix provenance, contract, QC, or result inconsistencies
+FAIL  = do not release; fix contract, QC, or result inconsistencies
 ```
 

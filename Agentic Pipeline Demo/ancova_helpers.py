@@ -4,7 +4,6 @@ from __future__ import annotations
 
 import argparse
 import datetime as dt
-import hashlib
 import json
 import re
 from pathlib import Path
@@ -17,14 +16,6 @@ from scipy import stats
 
 def utc_now() -> str:
     return dt.datetime.now(dt.UTC).replace(microsecond=0).isoformat()
-
-
-def sha256_file(path: Path) -> str:
-    digest = hashlib.sha256()
-    with path.open("rb") as handle:
-        for chunk in iter(lambda: handle.read(65536), b""):
-            digest.update(chunk)
-    return digest.hexdigest()
 
 
 def load_json(value: str | Path | dict[str, Any]) -> dict[str, Any]:
@@ -291,8 +282,6 @@ def main() -> None:
 
     result["input_datasets"]["subject_data_path"] = str(args.subject_data.resolve())
     result["input_datasets"]["efficacy_data_path"] = str(args.efficacy_data.resolve())
-    result["input_datasets"]["subject_data_sha256"] = sha256_file(args.subject_data.resolve())
-    result["input_datasets"]["efficacy_data_sha256"] = sha256_file(args.efficacy_data.resolve())
 
     args.output_json.parent.mkdir(parents=True, exist_ok=True)
     args.output_json.write_text(json.dumps(result, indent=2), encoding="utf-8")

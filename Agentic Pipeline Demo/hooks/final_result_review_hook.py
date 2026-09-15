@@ -10,7 +10,6 @@ from __future__ import annotations
 
 import argparse
 import datetime as dt
-import hashlib
 import json
 import math
 import re
@@ -46,14 +45,6 @@ def utc_now() -> str:
 def load_json(path: Path) -> dict[str, Any]:
     with path.open(encoding="utf-8") as handle:
         return json.load(handle)
-
-
-def sha256_file(path: Path) -> str:
-    digest = hashlib.sha256()
-    with path.open("rb") as handle:
-        for chunk in iter(lambda: handle.read(65536), b""):
-            digest.update(chunk)
-    return digest.hexdigest()
 
 
 def field_value(contract: dict[str, Any], key: str) -> Any:
@@ -172,88 +163,6 @@ def check_contract_alignment(
             if not mismatches
             else "Analysis result has fields that do not match the extracted SAP contract."
         ),
-    )
-
-
-def verify_hash_from_result(
-    checks: list[dict[str, Any]],
-    *,
-    hook: str,
-    term: str,
-    path_value: str | None,
-    expected_hash: str | None,
-) -> None:
-    if not path_value or not expected_hash:
-        add_check(
-            checks,
-            hook=hook,
-            term=term,
-            passed=False,
-            expected="path and sha256 recorded",
-            observed={"path": path_value, "sha256": expected_hash},
-            details="Missing provenance path or hash.",
-        )
-        return
-    path = Path(path_value)
-    if not path.exists():
-        add_check(
-            checks,
-            hook=hook,
-            term=term,
-            passed=False,
-            expected="provenance file exists",
-            observed=str(path),
-            details="Recorded provenance file does not exist.",
-        )
-        return
-    observed_hash = sha256_file(path)
-    add_check(
-        checks,
-        hook=hook,
-        term=term,
-        passed=observed_hash == expected_hash,
-        expected=expected_hash,
-        observed=observed_hash,
-        details=(
-            "Recorded hash matches current file content."
-            if observed_hash == expected_hash
-            else "Recorded hash does not match current file content."
-        ),
-    )
-
-
-def check_provenance(result: dict[str, Any], checks: list[dict[str, Any]]) -> None:
-    result_contract = result.get("analysis_contract", {})
-    qc_gate = result.get("qc_gate", {})
-    inputs = result.get("input_datasets", {})
-
-    verify_hash_from_result(
-        checks,
-        hook="provenance_hash_hook",
-        term="sap_contract_hash_matches",
-        path_value=result_contract.get("contract_path"),
-        expected_hash=result_contract.get("contract_sha256"),
-    )
-    verify_hash_from_result(
-        checks,
-        hook="provenance_hash_hook",
-        term="qc_summary_hash_matches",
-        path_value=qc_gate.get("qc_summary_path"),
-        expected_hash=qc_gate.get("qc_summary_sha256"),
-    )
-    verify_hash_from_result(
-        checks,
-        hook="provenance_hash_hook",
-        term="subject_data_hash_matches",
-        path_value=inputs.get("subject_data_path"),
-        expected_hash=inputs.get("subject_data_sha256"),
-    )
-    verify_hash_from_result(
-        checks,
-        hook="provenance_hash_hook",
-        term="efficacy_data_hash_matches",
-        path_value=inputs.get("efficacy_data_path"),
-        expected_hash=inputs.get("efficacy_data_sha256"),
     )
 
 
@@ -454,7 +363,6 @@ def run_final_result_review_hook(
     checks: list[dict[str, Any]] = []
     check_qc_gate_consistency(result, checks)
     check_contract_alignment(result, contract, checks)
-    check_provenance(result, checks)
     check_source_data_handling(result, checks)
     check_statistical_result(result, checks)
     check_final_report_text(report_text, checks)

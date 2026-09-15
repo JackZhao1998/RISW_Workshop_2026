@@ -5,7 +5,6 @@ from __future__ import annotations
 
 import argparse
 import datetime as dt
-import hashlib
 import json
 import re
 from pathlib import Path
@@ -30,14 +29,6 @@ REQUIRED_SCALAR_FIELDS = [
     "formula",
     "contrast",
 ]
-
-
-def sha256_file(path: Path) -> str:
-    digest = hashlib.sha256()
-    with path.open("rb") as handle:
-        for chunk in iter(lambda: handle.read(65536), b""):
-            digest.update(chunk)
-    return digest.hexdigest()
 
 
 def utc_now() -> str:
@@ -205,7 +196,6 @@ def extract_contract(sap_path: Path) -> dict[str, Any]:
         "analysis_contract": contract,
         "extraction_metadata": {
             "sap_path": str(sap_path),
-            "sap_sha256": sha256_file(sap_path),
             "extracted_at_utc": utc_now(),
             "extractor_version": EXTRACTOR_VERSION,
             "note": "Extraction only. No dataset readiness decision or ANCOVA execution was performed.",
